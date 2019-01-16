@@ -33,6 +33,17 @@ def setup_instances():
     return redirect(url_for('home_get'))
 
 
+@app.route("/destroy_instances")
+def destroy_instances():
+    if not conf.check_session():
+        return redirect(url_for('home_get'))
+
+    # Code for removing aws instances
+    conf.end_session()
+
+    return redirect(url_for('home_get'))
+
+
 @app.route("/run_system/<topic>")
 def run_system(topic):
     if not conf.check_session():
