@@ -1,7 +1,7 @@
 import os
 import os.path
 import datetime
-from session_exceptions import NoSessionFoundException. SessionExistsException
+from config.session_exceptions import NoSessionFoundException, SessionExistsException
 
 class Config:
 
@@ -35,11 +35,25 @@ class Config:
             session.write(line)
 
 
+    def get_session_contents(self):
+        if not self.check_session():
+            raise NoSessionFoundException
+        session_dict = dict()
+        with open(self.session_file, "r") as session:
+            for line in session:
+                line_list = [i.strip() for i in line.split("=")]
+                if len(line_list) != 2:
+                    continue
+                else:
+                    session_dict[line_list[0]] = line_list[1]
+        return session_dict
+
+
     def add_to_session(self, name, value):
         if not self.check_session():
             raise NoSessionFoundException()
         with open(self.session_file, "a") as session:
-            line = "%s = %s" % (name, value)
+            line = "\n%s = %s" % (name, value)
             session.write(line)
 
 
