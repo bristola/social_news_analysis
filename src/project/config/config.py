@@ -3,6 +3,7 @@ import os.path
 import datetime
 from config.session_exceptions import NoSessionFoundException, SessionExistsException
 
+
 class Config:
 
     def __init__(self, config_file_name="config.txt", session_file_name="session.txt"):

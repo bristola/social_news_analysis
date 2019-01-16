@@ -1,8 +1,8 @@
 from config.config import Config
 import setup.instance_setup
 from flask import render_template, Flask, Response, redirect, url_for, request, abort
-
 import time
+
 
 app = Flask(__name__)
 conf = Config()

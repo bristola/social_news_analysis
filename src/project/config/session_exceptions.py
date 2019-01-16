@@ -4,6 +4,7 @@ class NoSessionFoundException(Exception):
         message = "There is no active session to add content. Please create a session using create_session() first."
         Exception.__init__(self, message)
 
+
 class SessionExistsException(Exception):
 
     def __init__(self):
