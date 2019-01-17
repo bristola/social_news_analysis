@@ -28,10 +28,14 @@ class Twitter_Collector(Data_Collector):
         return tweets, min_id-1
 
 
-    def run(self, topic):
-        iterations = 2
+    def run(self, topic, iterations):
         min_id = None
         tweets = list()
         for i in range(0, iterations):
             cur_tweets, min_id = self.search(topic, max=min_id)
             tweets.extend(cur_tweets)
+
+        # TODO: Should I gather the most popular tweets or the most recent?
+        # TODO: Check to make sure their is no repeat user tweet
+        # TODO: Maybe take into account the likes and retweets
+        # TODO: Write it to a file

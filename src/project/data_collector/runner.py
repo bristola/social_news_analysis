@@ -14,7 +14,7 @@ args = parser.parse_args()
 
 if args.type == "Twitter":
     t = Twitter_Collector(args.api_key, args.api_secret_key, args.access_token, args.access_token_secret)
-    t.run(args.topic)
+    t.run(args.topic, 3)
 elif args.type == "News":
     print("Analyze news articles with search term:", args.topic)
 else:
