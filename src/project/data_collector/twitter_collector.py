@@ -1,6 +1,6 @@
 import twitter
-from data_collector import Data_Collector
 import time
+from data_collector import Data_Collector
 
 class Twitter_Collector(Data_Collector):
 
@@ -9,6 +9,7 @@ class Twitter_Collector(Data_Collector):
                                consumer_secret=secret_key,
                                access_token_key=token,
                                access_token_secret=token_secret)
+        super().__init__('twitter.txt')
 
 
     def search(self, topic, max=None, c=100):
@@ -17,15 +18,31 @@ class Twitter_Collector(Data_Collector):
         min_id = None
         for tweet in results:
             current = dict()
-            current['favorites'] = tweet.favorite_count
-            current['retweets'] = tweet.retweet_count
-            current['text'] = tweet.text
             current['user'] = tweet.user.screen_name
-            current['id'] = tweet.id
+            current['retweets'] = tweet.retweet_count
+            current['text'] = tweet.text if tweet.full_text is None or tweet.full_text == "" else tweet.full_text
             if min_id == None or int(tweet.id) < min_id:
                 min_id = int(tweet.id)
             tweets.append(current)
         return tweets, min_id-1
+
+
+    def filter_users(self, tweets):
+        users = list()
+        out_tweets = list()
+        for tweet in tweets:
+            if not tweet['user'] in users:
+                users.append(tweet['user'])
+                out_tweets.append(tweet)
+        return out_tweets
+
+
+    def create_strings(self, tweets):
+        out_tweets = list()
+        for tweet in tweets:
+            out = "%s|%s" % (tweet['retweets'], tweet['text'].replace("\n"," "))
+            out_tweets.append(out)
+        return out_tweets
 
 
     def run(self, topic, iterations):
@@ -34,8 +51,6 @@ class Twitter_Collector(Data_Collector):
         for i in range(0, iterations):
             cur_tweets, min_id = self.search(topic, max=min_id)
             tweets.extend(cur_tweets)
-
-        # TODO: Should I gather the most popular tweets or the most recent or both?
-        # TODO: Check to make sure their is no repeat user tweet
-        # TODO: Maybe take into account the likes and retweets
-        # TODO: Write it to a file
+        tweets = self.filter_users(tweets)
+        tweets = self.create_strings(tweets)
+        self.write_to_file(tweets)
