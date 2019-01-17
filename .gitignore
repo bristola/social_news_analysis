@@ -3,3 +3,5 @@ __pycache__
 .cache
 config.txt
 session.txt
+twitter.txt
+news.txt
