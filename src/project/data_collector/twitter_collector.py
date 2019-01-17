@@ -8,7 +8,8 @@ class Twitter_Collector(Data_Collector):
         self.api = twitter.Api(consumer_key=key,
                                consumer_secret=secret_key,
                                access_token_key=token,
-                               access_token_secret=token_secret)
+                               access_token_secret=token_secret,
+                               tweet_mode='extended')
         super().__init__('twitter.txt')
 
 
@@ -20,7 +21,7 @@ class Twitter_Collector(Data_Collector):
             current = dict()
             current['user'] = tweet.user.screen_name
             current['retweets'] = tweet.retweet_count
-            current['text'] = tweet.text if tweet.full_text is None or tweet.full_text == "" else tweet.full_text
+            current['text'] = tweet.text if tweet.full_text is None else tweet.full_text
             if min_id == None or int(tweet.id) < min_id:
                 min_id = int(tweet.id)
             tweets.append(current)

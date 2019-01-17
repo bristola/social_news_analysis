@@ -1,4 +1,4 @@
-class Data_Collector():
+class Data_Collector:
 
     def __init__(self, out_file):
         self.output = out_file
