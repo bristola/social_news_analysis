@@ -12,7 +12,7 @@ class Twitter_Collector(Data_Collector):
 
 
     def search(self, topic, max=None, c=100):
-        results = self.api.GetSearch(term=topic, max_id=max, count=c, result_type="recent", lang='en')
+        results = self.api.GetSearch(term=topic, max_id=max, count=c, result_type="mixed", lang='en')
         tweets = list()
         min_id = None
         for tweet in results:
@@ -35,7 +35,7 @@ class Twitter_Collector(Data_Collector):
             cur_tweets, min_id = self.search(topic, max=min_id)
             tweets.extend(cur_tweets)
 
-        # TODO: Should I gather the most popular tweets or the most recent?
+        # TODO: Should I gather the most popular tweets or the most recent or both?
         # TODO: Check to make sure their is no repeat user tweet
         # TODO: Maybe take into account the likes and retweets
         # TODO: Write it to a file
