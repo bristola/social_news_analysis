@@ -12,17 +12,32 @@ class News_Collector(Data_Collector):
         super().__init__('news.txt')
 
 
-    def search(self, topic):
-        json = self.api.get_everything(q=topic, language='en', sort_by='relevancy')
+    def search(self, topic, max=1, c=100):
+        json = self.api.get_everything(q=topic, language='en', sort_by='relevancy', page=max, page_size=c)
         articles = json['articles']
         news = list()
         for article in articles:
-            print(article['url'])
             a = Article(article['url'])
             a.download()
-            text = fulltext(a.html)
-            news.append(text)
-        return news
+            try:
+                text = fulltext(a.html)
+                news.append(text)
+            except Exception as e:
+                pass
+        return news, max+1
 
-    def run(self, topic):
-        news = self.search(topic)
+    def create_strings(self, data):
+        out_articles = list()
+        for article in data:
+            out = article.replace("\n","").replace("Advertisement","")
+            out_articles.append(out)
+        return out_articles
+
+    def run(self, topic, iterations):
+        page = 1
+        news_paper = list()
+        for i in range(0, iterations):
+            news, page = self.search(topic, max=page)
+            news_paper.extend(news)
+        news_paper = self.create_strings(news_paper)
+        self.write_to_file(news_paper)

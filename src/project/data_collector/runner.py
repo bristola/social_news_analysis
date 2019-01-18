@@ -18,9 +18,9 @@ if args.type == "Twitter" and None in (args.api_secret_key, args.access_token, a
 else:
     if args.type == "Twitter":
         t = Twitter_Collector(args.api_key, args.api_secret_key, args.access_token, args.access_token_secret)
-        t.run(args.topic)
+        t.run(args.topic, 10)
     elif args.type == "News":
         t = News_Collector(args.api_key)
-        t.run(args.topic)
+        t.run(args.topic, 1)
     else:
         print("Invalid type argument!")

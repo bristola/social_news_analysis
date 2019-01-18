@@ -39,16 +39,15 @@ class Twitter_Collector(Data_Collector):
         return out_tweets
 
 
-    def create_strings(self, tweets):
+    def create_strings(self, data):
         out_tweets = list()
-        for tweet in tweets:
+        for tweet in data:
             out = "%s|%s" % (tweet['retweets'], tweet['text'].replace("\n"," "))
             out_tweets.append(out)
         return out_tweets
 
 
-    def run(self, topic):
-        iterations = 10
+    def run(self, topic, iterations):
         min_id = None
         tweets = list()
         for i in range(0, iterations):
