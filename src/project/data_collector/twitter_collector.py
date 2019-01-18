@@ -1,6 +1,7 @@
 import twitter
-import time
 from data_collector import Data_Collector
+
+# pip install python-twitter
 
 class Twitter_Collector(Data_Collector):
 
@@ -46,7 +47,8 @@ class Twitter_Collector(Data_Collector):
         return out_tweets
 
 
-    def run(self, topic, iterations):
+    def run(self, topic):
+        iterations = 10
         min_id = None
         tweets = list()
         for i in range(0, iterations):
