@@ -21,17 +21,22 @@ class News_Collector(Data_Collector):
             a.download()
             try:
                 text = fulltext(a.html)
-                news.append(text)
+                current = dict()
+                current['text'] = text
+                current['author'] = article['author']
+                news.append(current)
             except Exception as e:
                 pass
         return news, max+1
 
+
     def create_strings(self, data):
         out_articles = list()
         for article in data:
-            out = article.replace("\n","").replace("Advertisement","")
+            out = article['text'].replace("\n","").replace("Advertisement","")
             out_articles.append(out)
         return out_articles
+
 
     def run(self, topic, iterations):
         page = 1
@@ -39,5 +44,6 @@ class News_Collector(Data_Collector):
         for i in range(0, iterations):
             news, page = self.search(topic, max=page)
             news_paper.extend(news)
+        news_paper = self.filter_authors(news_paper)
         news_paper = self.create_strings(news_paper)
         self.write_to_file(news_paper)
