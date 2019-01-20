@@ -3,9 +3,6 @@ from data_collector import Data_Collector
 
 # pip install python-twitter
 
-# TODO: Retweets are coming through the search and populating data with
-# duplicate tweets.
-
 class Twitter_Collector(Data_Collector):
 
     def __init__(self, key, secret_key, token, token_secret):
@@ -22,12 +19,13 @@ class Twitter_Collector(Data_Collector):
         tweets = list()
         min_id = None
         for tweet in results:
+            if min_id == None or int(tweet.id) < min_id:
+                min_id = int(tweet.id)
             current = dict()
+            tweet = tweet if tweet.retweeted_status is None else tweet.retweeted_status
             current['author'] = tweet.user.screen_name
             current['retweets'] = tweet.retweet_count
             current['text'] = tweet.text if tweet.full_text is None else tweet.full_text
-            if min_id == None or int(tweet.id) < min_id:
-                min_id = int(tweet.id)
             tweets.append(current)
         return tweets, min_id-1
 
