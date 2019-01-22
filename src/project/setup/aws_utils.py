@@ -11,6 +11,7 @@ class AWS_Utils:
         self.security_group = [security_group]
         self.image_id = image_id
         self.ec2 = boto3.resource('ec2', region_name='us-east-1')
+        self.ec2_client = boto3.client('ec2', region_name='us-east-1')
 
 
     def create_instance(self, number):
@@ -33,3 +34,7 @@ class AWS_Utils:
             if instance.id in ids:
                 ips.append(instance.public_ip_address)
         return ips
+
+
+    def end_instances(self, ids):
+        response = self.ec2_client.terminate_instances(InstanceIds=ids)
