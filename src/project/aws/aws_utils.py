@@ -22,7 +22,7 @@ class AWS_Utils:
                                   MinCount=number,
                                   MaxCount=number)
         ids = [instance.id for instance in instances]
-        time.sleep(30)
+        time.sleep(60)
         ips = self.get_public_ips(ids)
         return ids, ips
 

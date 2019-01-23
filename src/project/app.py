@@ -1,11 +1,19 @@
 from config.config import Config
-import setup.instance_setup
+from aws.aws_runner import AWS_Runner
 from flask import render_template, Flask, Response, redirect, url_for, request, abort
 import time
 
 
 app = Flask(__name__)
+
 conf = Config()
+conf_contents = conf.get_config_contents()
+
+aws = AWS_Runner(conf_contents['AWS Key Name'],
+                 conf_contents['AWS Machine Type'],
+                 conf_contents['AWS Security Group ID'],
+                 conf_contents['AWS Image ID'],
+                 conf_contents['Path to pem'])
 
 
 @app.route("/", methods=["GET"])
@@ -25,10 +33,18 @@ def setup_instances():
     if conf.check_session():
         return redirect(url_for('home_get'))
 
-    # Run code from instance_setup.py
+    ids, ips = aws.setup_instances()
 
-    # Add ips and other info to the session file
     conf.create_session()
+
+    conf.add_to_session("Twitter Collector ID", ids[0])
+    conf.add_to_session("Twitter Collector IP", ips[0])
+    conf.add_to_session("News Collector ID", ids[1])
+    conf.add_to_session("News Collector IP", ips[1])
+    conf.add_to_session("Spark ID", ids[2])
+    conf.add_to_session("Spark IP", ips[2])
+    conf.add_to_session("Database ID", ids[3])
+    conf.add_to_session("Database IP", ips[3])
 
     return redirect(url_for('home_get'))
 
@@ -38,7 +54,7 @@ def destroy_instances():
     if not conf.check_session():
         return redirect(url_for('home_get'))
 
-    # Code for removing aws instances
+    aws.end_session(conf.get_session_contents())
     conf.end_session()
 
     return redirect(url_for('home_get'))

@@ -13,7 +13,7 @@ class Config:
 
     def get_config_contents(self):
         config_dict = dict()
-        with open(file_name, 'r') as config_contents:
+        with open(self.file, 'r') as config_contents:
             for line in config_contents:
                 line_list = [i.strip() for i in line.split("=")]
                 if len(line_list) != 2:
