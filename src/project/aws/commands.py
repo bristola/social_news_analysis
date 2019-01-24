@@ -22,4 +22,8 @@ news_destinations = ["data_collector.py",
 
 spark_cmd = []
 
+spark_files = []
+
+spark_destinations = []
+
 database_cmd = []
