@@ -8,12 +8,11 @@ twitter_files = ["data_collector/data_collector.py",
 twitter_destinations = ["data_collector.py",
                         "twitter_collector.py"]
 
-news_collector_cmd = ["sudo apt-get update",
+news_collector_cmd = ["sudo apt-get -y update",
                       "sudo apt-get install -y python3-pip",
-                      "sudo pip3 install newsapi-python",
-                      " sudo pip3 install feedparser",
-                      "",
-                      "sudo pip3 install newspaper3k"]
+                      "sudo pip3 install --upgrade pip",
+                      "sudo pip3 install --ignore-installed newspaper3k",
+                      "sudo pip3 install newsapi-python"]
 
 news_files = ["data_collector/data_collector.py",
               "data_collector/news_collector.py"]
