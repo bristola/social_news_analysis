@@ -27,7 +27,3 @@ class Connection_Utils:
         with SCPClient(self.client.get_transport()) as scp_conn:
             for file, destination in zip(files, destinations):
                 scp_conn.put(file, destination)
-
-    def run_and_transfer(self, ip, commands, files, destinations):
-        self.run_commands(ip, commands)
-        self.transfer_files(ip, files, destinations)

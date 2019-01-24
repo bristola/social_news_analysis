@@ -13,35 +13,16 @@ class AWS_Runner:
     def setup_instances(self):
         ids, ips = self.aws.create_instance(4)
 
-        threads = list()
+        self.conn.run_commands(ips[0], commands.twitter_collector_cmd)
+        self.conn.transfer_files(ips[0], commands.twitter_files, commands.twitter_destinations)
 
-        threads.append(threading.Thread(target=self.conn.run_and_transfer,
-                                        args=(ips[0],
-                                              commands.twitter_collector_cmd,
-                                              commands.twitter_files,
-                                              commands.twitter_destinations,)))
+        self.conn.run_commands(ips[1], commands.news_collector_cmd)
+        self.conn.transfer_files(ips[1], commands.news_files, commands.news_destinations)
 
-        threads.append(threading.Thread(target=self.conn.run_and_transfer,
-                                        args=(ips[1],
-                                              commands.news_collector_cmd,
-                                              commands.news_files,
-                                              commands.news_destinations,)))
+        self.conn.run_commands(ips[2], commands.spark_cmd)
+        self.conn.transfer_files(ips[2], commands.spark_files, commands.spark_destinations)
 
-        threads.append(threading.Thread(target=self.conn.run_and_transfer,
-                                        args=(ips[2],
-                                              commands.spark_cmd,
-                                              commands.spark_files,
-                                              commands.spark_destinations,)))
-
-        threads.append(threading.Thread(target=self.conn.run_commands,
-                                        args=(ips[3],
-                                              commands.database_cmd,)))
-
-        for thread in threads:
-            thread.start()
-
-        for thread in threads:
-            thread.join()
+        self.conn.run_commands(ips[3], commands.database_cmd)
 
         return ids, ips
 

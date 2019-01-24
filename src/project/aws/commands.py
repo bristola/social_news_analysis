@@ -20,7 +20,11 @@ news_files = ["data_collector/data_collector.py",
 news_destinations = ["data_collector.py",
                      "news_collector.py"]
 
-spark_cmd = []
+spark_cmd = ["sudo apt-get update",
+             "sudo apt-get -y install default-jre",
+             "sudo apt-get -y install default-jdk",
+             "sudo apt-get install -y scala",
+             ""]
 
 spark_files = []
 
