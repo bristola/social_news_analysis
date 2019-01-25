@@ -1,0 +1,9 @@
+[
+    {"text": "awful", "label": "neg"},
+    {"text": "horrible", "label": "neg"},
+    {"text": "do not like", "label": "neg"},
+    {"text": "do like", "label": "pos"},
+    {"text": "like", "label": "pos"},
+    {"text": "good", "label": "pos"},
+    {"text": "awesome", "label": "pos"}
+]

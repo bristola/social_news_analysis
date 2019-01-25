@@ -20,14 +20,16 @@ news_files = ["data_collector/data_collector.py",
 news_destinations = ["data_collector.py",
                      "news_collector.py"]
 
-spark_cmd = ["sudo apt-get update",
-             "sudo apt-get -y install default-jre",
-             "sudo apt-get -y install default-jdk",
-             "sudo apt-get install -y scala",
-             ""]
+analytics_cmd = ["sudo apt-get update",
+                 "sudo apt-get install -y python3-pip",
+                 "sudo pip3 install --upgrade pip",
+                 # "sudo pip3 install twython"
+                 # "sudo pip3 install nltk"
+                 "sudo pip3 install -U textblob",
+                 "python3 -m textblob.download_corpora"]
 
-spark_files = []
+analytics_files = ["analysis/analysis.py"]
 
-spark_destinations = []
+analytics_destinations = ["analysis.py"]
 
 database_cmd = []
