@@ -23,8 +23,6 @@ news_destinations = ["data_collector.py",
 analytics_cmd = ["sudo apt-get update",
                  "sudo apt-get install -y python3-pip",
                  "sudo pip3 install --upgrade pip",
-                 # "sudo pip3 install twython"
-                 # "sudo pip3 install nltk"
                  "sudo pip3 install -U textblob",
                  "python3 -m textblob.download_corpora"]
 
@@ -33,3 +31,7 @@ analytics_files = ["analysis/analysis.py"]
 analytics_destinations = ["analysis.py"]
 
 database_cmd = []
+
+database_files = ["database_schema.sql"]
+
+database_destinations = ["database_schema.sql"]

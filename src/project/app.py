@@ -41,10 +41,8 @@ def setup_instances():
     conf.add_to_session("Twitter Collector IP", ips[0])
     conf.add_to_session("News Collector ID", ids[1])
     conf.add_to_session("News Collector IP", ips[1])
-    conf.add_to_session("Spark ID", ids[2])
-    conf.add_to_session("Spark IP", ips[2])
-    conf.add_to_session("Database ID", ids[3])
-    conf.add_to_session("Database IP", ips[3])
+    conf.add_to_session("Database ID", ids[2])
+    conf.add_to_session("Database IP", ips[2])
 
     return redirect(url_for('home_get'))
 
