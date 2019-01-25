@@ -1,9 +1,9 @@
 [
-    {"text": "awful", "label": "neg"},
-    {"text": "horrible", "label": "neg"},
-    {"text": "do not like", "label": "neg"},
-    {"text": "do like", "label": "pos"},
-    {"text": "like", "label": "pos"},
-    {"text": "good", "label": "pos"},
-    {"text": "awesome", "label": "pos"}
+    {"text": "awful", "label": "neg2"},
+    {"text": "horrible", "label": "neg2"},
+    {"text": "do not like", "label": "neg1"},
+    {"text": "do like", "label": "pos1"},
+    {"text": "like", "label": "pos1"},
+    {"text": "good", "label": "pos1"},
+    {"text": "awesome", "label": "pos2"}
 ]
