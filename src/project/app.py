@@ -41,8 +41,12 @@ def setup_instances():
     conf.add_to_session("Twitter Collector IP", ips[0])
     conf.add_to_session("News Collector ID", ids[1])
     conf.add_to_session("News Collector IP", ips[1])
-    conf.add_to_session("Database ID", ids[2])
-    conf.add_to_session("Database IP", ips[2])
+    conf.add_to_session("Twitter Analyzer ID", ids[2])
+    conf.add_to_session("Twitter Analyzer IP", ips[2])
+    conf.add_to_session("News Analyzer ID", ids[3])
+    conf.add_to_session("News Analyzer IP", ips[3])
+    conf.add_to_session("Database ID", ids[4])
+    conf.add_to_session("Database IP", ips[4])
 
     return redirect(url_for('home_get'))
 
@@ -66,6 +70,8 @@ def run_system(topic):
     print("Running system with topic:", topic)
 
     # Run code from executor.py
+    ips = [value for key, value in conf.get_session_contents().items() if "IP" in key]
+    aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
 
     return render_template("results.html")
 
