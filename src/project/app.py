@@ -3,6 +3,7 @@ from aws.aws_runner import AWS_Runner
 from flask import render_template, Flask, Response, redirect, url_for, request, abort
 import time
 
+# pip install flask
 
 app = Flask(__name__)
 
