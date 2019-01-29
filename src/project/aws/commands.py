@@ -1,5 +1,8 @@
-twitter_collector_cmd = ["sudo apt-get update",
+twitter_collector_cmd = ["sudo apt-get -y update",
                          "sudo apt-get install -y python3-pip",
+                         "sudo pip3 install --upgrade pip",
+                         "sudo pip3 install --ignore-installed newspaper3k",
+                         "sudo pip3 install newsapi-python",
                          "sudo pip3 install python-twitter"]
 
 twitter_files = ["data_collector/runner.py",
@@ -16,7 +19,8 @@ news_collector_cmd = ["sudo apt-get -y update",
                       "sudo apt-get install -y python3-pip",
                       "sudo pip3 install --upgrade pip",
                       "sudo pip3 install --ignore-installed newspaper3k",
-                      "sudo pip3 install newsapi-python"]
+                      "sudo pip3 install newsapi-python",
+                      "sudo pip3 install python-twitter"]
 
 news_files = ["data_collector/runner.py",
               "data_collector/data_collector.py",

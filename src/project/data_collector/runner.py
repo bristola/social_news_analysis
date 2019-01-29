@@ -21,6 +21,6 @@ else:
         t.run(args.topic, 25)
     elif args.type == "News":
         t = News_Collector(args.api_key)
-        t.run(args.topic, 10)
+        t.run(args.topic, 5)
     else:
         print("Invalid type argument!")
