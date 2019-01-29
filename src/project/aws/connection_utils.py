@@ -4,6 +4,8 @@ from scp import SCPClient
 # pip install paramiko
 # pip install scp
 
+# MAYBE HAVE A STATIC variable and method to run the commands and then add the stdout to the list and then wait for it to exit
+
 class Connection_Utils:
 
     def __init__(self, pem_location, username="ubuntu"):
