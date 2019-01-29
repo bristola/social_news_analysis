@@ -13,50 +13,69 @@ class AWS_Runner:
     def setup_instances(self):
         ids, ips = self.aws.create_instance(5)
 
-        threads = list()
+        self.conn.run_commands(ips[0], commands.twitter_collector_cmd)
+        self.conn.transfer_files(ips[0], commands.twitter_files, commands.twitter_destinations)
 
-        t = threading.Thread(target=self.installation_thread,
-                              args=(ips[0],
-                                    commands.twitter_collector_cmd,
-                                    commands.twitter_files,
-                                    commands.twitter_destinations,))
-        threads.append(t)
+        self.conn.run_commands(ips[1], commands.news_collector_cmd)
+        self.conn.transfer_files(ips[1], commands.news_files, commands.news_destinations)
 
-        t = threading.Thread(target=self.installation_thread,
-                              args=(ips[1],
-                                    commands.news_collector_cmd,
-                                    commands.news_files,
-                                    commands.news_destinations,))
-        threads.append(t)
+        self.conn.run_commands(ips[2], commands.analytics_cmd)
+        self.conn.transfer_files(ips[2], commands.analytics_files, commands.analytics_destinations)
 
-        t = threading.Thread(target=self.installation_thread,
-                              args=(ips[2],
-                                    commands.analytics_cmd,
-                                    commands.analytics_files,
-                                    commands.analytics_destinations,))
-        threads.append(t)
+        self.conn.run_commands(ips[3], commands.analytics_cmd)
+        self.conn.transfer_files(ips[3], commands.analytics_files, commands.analytics_destinations)
 
-        t = threading.Thread(target=self.installation_thread,
-                              args=(ips[3],
-                                    commands.analytics_cmd,
-                                    commands.analytics_files,
-                                    commands.analytics_destinations,))
-        threads.append(t)
-
-        t = threading.Thread(target=self.installation_thread,
-                              args=(ips[4],
-                                    commands.database_cmd,
-                                    commands.database_files,
-                                    commands.database_destinations,))
-        threads.append(t)
-
-        for thread in threads:
-            thread.start()
-
-        for thread in threads:
-            thread.join()
+        self.conn.run_commands(ips[4], commands.database_cmd)
+        self.conn.transfer_files(ips[4], commands.database_files, commands.database_destinations)
 
         return ids, ips
+
+        # ids, ips = self.aws.create_instance(5)
+        #
+        # threads = list()
+        #
+        # t = threading.Thread(target=self.installation_thread,
+        #                       args=(ips[0],
+        #                             commands.twitter_collector_cmd,
+        #                             commands.twitter_files,
+        #                             commands.twitter_destinations,))
+        # threads.append(t)
+        #
+        # t = threading.Thread(target=self.installation_thread,
+        #                       args=(ips[1],
+        #                             commands.news_collector_cmd,
+        #                             commands.news_files,
+        #                             commands.news_destinations,))
+        # threads.append(t)
+        #
+        # t = threading.Thread(target=self.installation_thread,
+        #                       args=(ips[2],
+        #                             commands.analytics_cmd,
+        #                             commands.analytics_files,
+        #                             commands.analytics_destinations,))
+        # threads.append(t)
+        #
+        # t = threading.Thread(target=self.installation_thread,
+        #                       args=(ips[3],
+        #                             commands.analytics_cmd,
+        #                             commands.analytics_files,
+        #                             commands.analytics_destinations,))
+        # threads.append(t)
+        #
+        # t = threading.Thread(target=self.installation_thread,
+        #                       args=(ips[4],
+        #                             commands.database_cmd,
+        #                             commands.database_files,
+        #                             commands.database_destinations,))
+        # threads.append(t)
+        #
+        # for thread in threads:
+        #     thread.start()
+        #
+        # for thread in threads:
+        #     thread.join()
+        #
+        # return ids, ips
 
 
     def execute_system(self, session, config, topic):
