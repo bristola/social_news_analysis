@@ -53,14 +53,11 @@ class AWS_Runner:
 
         # Output will be in the database, just return the results ID
 
-        pass
-
 
     def end_session(self, config):
         ids = [value for key, value in config.items() if "ID" in key]
         self.aws.end_instances(ids)
 
     def installation_thread(self, params):
-        print(str(params))
         self.conn.run_commands(params[0], params[1])
         self.conn.transfer_files(params[0], params[2], params[3])
