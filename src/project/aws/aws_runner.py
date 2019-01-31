@@ -31,16 +31,11 @@ class AWS_Runner:
     def execute_system(self, session, config, topic):
         # Execute data collection processes
         ip = session['Twitter Collector IP']
-        twitter_key = config['Twitter API key']
-        twitter_secret = config['Twitter API secret key']
-        twitter_token = config['Twitter Access token']
-        twitter_token_secret = config['Twitter Access token secret']
-        command = commands.data_exec_twitter % (topic, twitter_key, twitter_secret, twitter_token, twitter_token_secret)
+        command = commands.data_exec_twitter % (topic, config['Twitter API key'], config['Twitter API secret key'], config['Twitter Access token'], config['Twitter Access token secret'])
         self.conn.run_commands(ip, [command])
 
         ip = session['News Collector IP']
-        news_key = config['News API key']
-        command = commands.data_exec_news % (topic, news_key)
+        command = commands.data_exec_news % (topic, config['News API key'])
         self.conn.run_commands(ip, [command])
 
         # Determine how many data analytics servers to create based on how many are running
