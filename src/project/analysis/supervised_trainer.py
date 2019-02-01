@@ -13,7 +13,7 @@ def get_next_tweet(file_name="tweets.txt"):
             try:
                 tweet = line.split("|")[1].strip()
                 tweet = re.sub('(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?',  ' ', tweet)
-                tweet = re.sub('[^a-zA-Z\d\s]', ' ', tweet)
+                tweet = re.sub('[^a-zA-Z\'\d\s]', ' ', tweet)
                 tweet = tweet.replace("amp", " ")
                 tweet = re.sub('[ ]{2,}', ' ', tweet)
                 yield tweet
