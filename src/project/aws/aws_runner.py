@@ -43,16 +43,7 @@ class AWS_Runner:
         pool.map(self.data_collection_thread, parameters)
         pool.close()
         pool.join()
-
-        # Execute data collection processes
-        # ip = session['Twitter Collector IP']
-        # command = commands.data_exec_twitter % (topic, config['Twitter API key'], config['Twitter API secret key'], config['Twitter Access token'], config['Twitter Access token secret'])
-        # self.conn.run_commands(ip, [command])
-        #
-        # ip = session['News Collector IP']
-        # command = commands.data_exec_news % (topic, config['News API key'])
-        # self.conn.run_commands(ip, [command])
-
+        
         # Determine how many data analytics servers to create based on how many are running
 
         # Start analytics machines and set them up

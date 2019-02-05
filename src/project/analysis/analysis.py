@@ -3,6 +3,8 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk import tokenize
 from nltk.stem import WordNetLemmatizer
 import json
+from stop_words import stop_words
+from extra_words import extra_words
 
 class Analyzer:
 
@@ -12,10 +14,15 @@ class Analyzer:
         download('vader_lexicon')
         self.lemmatizer = WordNetLemmatizer()
         self.sentiment_analyzer = SentimentIntensityAnalyzer()
-        with open(extra_words_file, 'r') as extra_words:
-            words = json.loads(extra_words.read())
-            print(words)
-            self.sentiment_analyzer.lexicon.update(words)
+        self.sentiment_analyzer.lexicon.update(extra_words)
+
+
+    def remove_stop_words(self, data):
+        data = data.lower()
+        for stop_word in stop_words:
+            data.replace(stop_word, "")
+        return data
+
 
     def get_sentiment(self, data):
         sentiment_total = 0
@@ -27,5 +34,7 @@ class Analyzer:
             sentiment_total += sentiment['compound']
         return sentiment_total / len(sentances)
 
+
 a = Analyzer()
-a.get_sentiment("This is a clown show or what?")
+print(a.remove_stop_words("This is a clown show or what?"))
+print(a.get_sentiment("This is a clown show or what?"))
