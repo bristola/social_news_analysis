@@ -5,6 +5,7 @@ from nltk.stem import WordNetLemmatizer
 import re
 from stop_words import stop_words
 from extra_words import extra_words
+from emotions import *
 
 class Analyzer:
 
@@ -62,7 +63,35 @@ class Analyzer:
 
 
     def get_mood(self, sentances):
-        return None
+        moods = {
+            "happiness": 0,
+            "anxiety": 0,
+            "sadness": 0,
+            "affection": 0,
+            "aggression": 0,
+            "expressive": 0,
+            "glory": 0
+        }
+        for sentance in sentances:
+            sentance = sentance.lower()
+            sentance = re.sub('[^a-zA-Z\'\d\s]', ' ', sentance)
+            sentance = re.sub('[ ]{2,}', ' ', sentance)
+            for word in sentance.split(" "):
+                if word in happiness:
+                    moods['happiness'] += 1
+                elif word in anxiety:
+                    moods['anxiety'] += 1
+                elif word in sadness:
+                    moods['sadness'] += 1
+                elif word in affection:
+                    moods['affection'] += 1
+                elif word in aggression:
+                    moods['aggression'] += 1
+                elif word in expressive:
+                    moods['expressive'] += 1
+                elif word in glory:
+                    moods['glory'] += 1
+        return moods
 
 
     def run(self, input_type, file_name):
