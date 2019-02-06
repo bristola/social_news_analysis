@@ -6,8 +6,6 @@ import re
 from stop_words import stop_words
 from extra_words import extra_words
 
-# TODO: Emoticons get removed when near a stop word, skewing the results
-
 class Analyzer:
 
     def __init__(self):
@@ -57,11 +55,9 @@ class Analyzer:
         return sentiment_total / len(sentances)
 
 
-    def get_emoticons_value(self, sentances):
+    def get_emoticons_value(self, line):
         emoticons = list()
-        for sentance in sentances:
-            emoticons.extend(re.findall(u'[\U00010000-\U0010ffff]', sentance, flags=re.UNICODE))
-        print(emoticons)
+        emoticons.extend(re.findall(u'[\U00010000-\U0010ffff]', line, flags=re.UNICODE))
         return emoticons
 
 
@@ -72,8 +68,8 @@ class Analyzer:
     def run(self, input_type, file_name):
         data = self.get_data(file_name)
 
-        sentiment = 0
         weight_total = 0
+        sentiment = 0
         emoticon = dict()
         mood = dict()
 
@@ -88,24 +84,20 @@ class Analyzer:
             sentances = self.prepare_data(line)
 
             sentiment_val = self.get_sentiment(sentances)
-            emoticon_val = self.get_emoticons_value(sentances)
             mood_val = self.get_mood(sentances)
+            emoticon_val = self.get_emoticons_value(line)
 
             sentiment += sentiment_val * weight
+            mood[mood_val] = 1 if mood_val not in mood else mood[mood_val] + 1
             for e in emoticon_val:
                 emoticon[e] = 1 if e not in emoticon else emoticon[e] + 1
-            mood[mood_val] = 1 if mood_val not in mood else mood[mood_val] + 1
 
-        return sentiment / weight_total, emoticon, mood
+        sentiment /= weight_total
+        return sentiment, mood, emoticon
 
 
 a = Analyzer()
-# text = "🤬 This is a clown show or what? It is so bad!"
-# sentances = a.prepare_data(text)
-# # print(sentances)
-# # print(a.get_sentiment(sentances))
-# print(a.get_emoticons_value(sentances))
-sentiment, emoticon, mood = a.run("Twitter", "test.txt")
+sentiment, mood, emoticon = a.run("Twitter", "test.txt")
 print(sentiment)
-print(emoticon)
 print(mood)
+print(emoticon)
