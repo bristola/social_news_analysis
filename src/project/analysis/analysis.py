@@ -6,7 +6,7 @@ import re
 from stop_words import stop_words
 from extra_words import extra_words
 
-# The get_sentiment function may need to be combined with other functionalities since we will need to tokenize each time
+# TODO: Emoticons get removed when near a stop word, skewing the results
 
 class Analyzer:
 
@@ -21,7 +21,7 @@ class Analyzer:
 
     def get_data(self, file_name):
         data = None
-        with open(file_name, 'r') as data_file:
+        with open(file_name, 'r', encoding="utf-8") as data_file:
             data = data_file.readlines()
         return data
 
@@ -36,6 +36,7 @@ class Analyzer:
             if stop_word == word:
                 return False
         return True
+
 
     def prepare_data(self, data):
         in_sentances = tokenize.sent_tokenize(data)
@@ -57,9 +58,11 @@ class Analyzer:
 
 
     def get_emoticons_value(self, sentances):
-        expression = re.compile(r'\\\\U([^\s]+)')
+        emoticons = list()
         for sentance in sentances:
-            print(expression.search(sentance))
+            emoticons.extend(re.findall(u'[\U00010000-\U0010ffff]', sentance, flags=re.UNICODE))
+        print(emoticons)
+        return emoticons
 
 
     def get_mood(self, sentances):
@@ -68,15 +71,19 @@ class Analyzer:
 
     def run(self, input_type, file_name):
         data = self.get_data(file_name)
+
         sentiment = 0
+        weight_total = 0
         emoticon = dict()
         mood = dict()
+
         for line in data:
             weight = 1
             if input_type == "Twitter":
                 columns = line.split("|")
-                weight += columns[0]
+                weight += int(columns[0])
                 line = '|'.join(columns[1:])
+            weight_total += weight
 
             sentances = self.prepare_data(line)
 
@@ -85,14 +92,20 @@ class Analyzer:
             mood_val = self.get_mood(sentances)
 
             sentiment += sentiment_val * weight
-            emoticon[emoticon_val] = 1 if emoticon_val not in emoticon else emoticon[emoticon_val] + 1
+            for e in emoticon_val:
+                emoticon[e] = 1 if e not in emoticon else emoticon[e] + 1
             mood[mood_val] = 1 if mood_val not in mood else mood[mood_val] + 1
-        sentiment /= len(data)
-        return sentiment, emoticon, mood
+
+        return sentiment / weight_total, emoticon, mood
 
 
 a = Analyzer()
-text = "🤬 This is a clown show or what? It is so bad!"
-sentances = a.prepare_data(text)
-print(sentances)
-print(a.get_sentiment(sentances))
+# text = "🤬 This is a clown show or what? It is so bad!"
+# sentances = a.prepare_data(text)
+# # print(sentances)
+# # print(a.get_sentiment(sentances))
+# print(a.get_emoticons_value(sentances))
+sentiment, emoticon, mood = a.run("Twitter", "test.txt")
+print(sentiment)
+print(emoticon)
+print(mood)
