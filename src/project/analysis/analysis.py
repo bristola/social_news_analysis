@@ -10,13 +10,20 @@ from extra_words import extra_words
 
 class Analyzer:
 
-    def __init__(self, extra_words_file='extra_words.json'):
+    def __init__(self):
         download('punkt')
         download('wordnet')
         download('vader_lexicon')
         self.lemmatizer = WordNetLemmatizer()
         self.sentiment_analyzer = SentimentIntensityAnalyzer()
         self.sentiment_analyzer.lexicon.update(extra_words)
+
+
+    def get_data(self, file_name):
+        data = None
+        with open(file_name, 'r') as data_file:
+            data = data_file.readlines()
+        return data
 
 
     def is_valid_lemma(self, word):
@@ -31,7 +38,6 @@ class Analyzer:
         return True
 
     def prepare_data(self, data):
-
         in_sentances = tokenize.sent_tokenize(data)
         out_sentances = list()
         for sentance in in_sentances:
@@ -42,7 +48,7 @@ class Analyzer:
         return out_sentances
 
 
-    def get_sentiment(self, data):
+    def get_sentiment(self, sentances):
         sentiment_total = 0
         for sentance in sentances:
             sentiment = self.sentiment_analyzer.polarity_scores(sentance)
@@ -50,8 +56,43 @@ class Analyzer:
         return sentiment_total / len(sentances)
 
 
+    def get_emoticons_value(self, sentances):
+        expression = re.compile(r'\\\\U([^\s]+)')
+        for sentance in sentances:
+            print(expression.search(sentance))
+
+
+    def get_mood(self, sentances):
+        return None
+
+
+    def run(self, input_type, file_name):
+        data = self.get_data(file_name)
+        sentiment = 0
+        emoticon = dict()
+        mood = dict()
+        for line in data:
+            weight = 1
+            if input_type == "Twitter":
+                columns = line.split("|")
+                weight += columns[0]
+                line = '|'.join(columns[1:])
+
+            sentances = self.prepare_data(line)
+
+            sentiment_val = self.get_sentiment(sentances)
+            emoticon_val = self.get_emoticons_value(sentances)
+            mood_val = self.get_mood(sentances)
+
+            sentiment += sentiment_val * weight
+            emoticon[emoticon_val] = 1 if emoticon_val not in emoticon else emoticon[emoticon_val] + 1
+            mood[mood_val] = 1 if mood_val not in mood else mood[mood_val] + 1
+        sentiment /= len(data)
+        return sentiment, emoticon, mood
+
+
 a = Analyzer()
-text = "This is a clown show or what? It is so bad!"
+text = "🤬 This is a clown show or what? It is so bad!"
 sentances = a.prepare_data(text)
 print(sentances)
 print(a.get_sentiment(sentances))
