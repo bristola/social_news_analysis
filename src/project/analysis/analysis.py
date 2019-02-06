@@ -2,7 +2,7 @@ from nltk import download
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk import tokenize
 from nltk.stem import WordNetLemmatizer
-import json
+import re
 from stop_words import stop_words
 from extra_words import extra_words
 
@@ -19,18 +19,24 @@ class Analyzer:
         self.sentiment_analyzer.lexicon.update(extra_words)
 
 
-    def remove_stop_words(self, data):
-        data = data.lower()
+    def is_valid_lemma(self, word):
+        expression = re.compile(r'(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?')
+        if expression.search(word):
+            return False
+        word = re.sub('[^a-zA-Z\'\d\s]', '', word)
+        word = word.lower()
         for stop_word in stop_words:
-            data = data.replace(stop_word, "")
-        return data
+            if stop_word == word:
+                return False
+        return True
 
     def prepare_data(self, data):
+
         in_sentances = tokenize.sent_tokenize(data)
         out_sentances = list()
         for sentance in in_sentances:
             lemmas = [self.lemmatizer.lemmatize(word) for word in sentance.split(" ")]
-            # Clean out bad data
+            lemmas = [lemma for lemma in lemmas if self.is_valid_lemma(lemma)]
             sentance = ' '.join(lemmas)
             out_sentances.append(sentance)
         return out_sentances
@@ -45,5 +51,7 @@ class Analyzer:
 
 
 a = Analyzer()
-# print(a.remove_stop_words("This is a clown show or what?"))
-print(a.get_sentiment("This is a clown show or what?"))
+text = "This is a clown show or what? It is so bad!"
+sentances = a.prepare_data(text)
+print(sentances)
+print(a.get_sentiment(sentances))
