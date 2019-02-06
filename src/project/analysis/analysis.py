@@ -97,8 +97,7 @@ class Analyzer:
     def run(self, input_type, file_name):
         data = self.get_data(file_name)
 
-        weight_total = 0
-        sentiment = 0
+        sentiment = dict()
         emoticon = dict()
         mood = dict()
 
@@ -108,7 +107,6 @@ class Analyzer:
                 columns = line.split("|")
                 weight += int(columns[0])
                 line = '|'.join(columns[1:])
-            weight_total += weight
 
             sentances = self.prepare_data(line)
 
@@ -116,12 +114,12 @@ class Analyzer:
             mood_val = self.get_mood(sentances)
             emoticon_val = self.get_emoticons_value(line)
 
-            sentiment += sentiment_val * weight
-            mood[mood_val] = 1 if mood_val not in mood else mood[mood_val] + 1
+            sentiment[sentiment_val] = weight if sentiment_val not in sentiment else sentiment[sentiment_val] + weight
+            for m, count in mood_val.items():
+                mood[m] = count if m not in mood else mood[m] + count
             for e in emoticon_val:
                 emoticon[e] = 1 if e not in emoticon else emoticon[e] + 1
 
-        sentiment /= weight_total
         return sentiment, mood, emoticon
 
 
