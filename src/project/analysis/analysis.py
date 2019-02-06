@@ -98,8 +98,8 @@ class Analyzer:
         data = self.get_data(file_name)
 
         sentiment = dict()
-        emoticon = dict()
         mood = dict()
+        emoticon = dict()
 
         for line in data:
             weight = 1
