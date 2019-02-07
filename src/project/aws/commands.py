@@ -42,7 +42,9 @@ analytics_files = ["analysis/analysis.py"]
 
 analytics_destinations = ["analysis.py"]
 
-database_cmd = []
+database_cmd = ["sudo apt-get update",
+                "sudo apt-get install -y postgresql postgresql-contrib",
+                "sudo -u postgres psql -f database_schema.sql"]
 
 database_files = ["database_schema.sql"]
 

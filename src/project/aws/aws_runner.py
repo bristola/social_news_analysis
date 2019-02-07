@@ -31,6 +31,10 @@ class AWS_Runner:
 
     def execute_system(self, session, config, topic):
 
+        # Insert Job into database if it's a new job
+
+        # Insert Run into database and save it's ID for the analytics code
+
         command1 = commands.data_exec_twitter % (topic, config['Twitter API key'], config['Twitter API secret key'], config['Twitter Access token'], config['Twitter Access token secret'])
         command2 = commands.data_exec_news % (topic, config['News API key'])
 
@@ -43,12 +47,12 @@ class AWS_Runner:
         pool.map(self.data_collection_thread, parameters)
         pool.close()
         pool.join()
-        
+
         # Determine how many data analytics servers to create based on how many are running
 
         # Start analytics machines and set them up
 
-        # Transfer data to analytics machines
+        # Transfer data to analytics machines (Need to transfer PEM file aswell from config)
 
         # Execute data analytics
 
