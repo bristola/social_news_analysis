@@ -44,6 +44,9 @@ analytics_destinations = ["analysis.py"]
 
 database_cmd = ["sudo apt-get update",
                 "sudo apt-get install -y postgresql postgresql-contrib",
+                "sudo sed -i -- 's|127.0.0.1/32|0.0.0.0/0|g' ../../etc/postgresql/9.3/main/pg_hba.conf",
+                "sudo sed -i -- \"s/#listen_addresses = 'localhost'/listen_addresses = '*'/g\" ../../etc/postgresql/9.3/main/postgresql.conf",
+                "sudo service postgresql restart",
                 "sudo -u postgres psql -f database_schema.sql"]
 
 database_files = ["database_schema.sql"]

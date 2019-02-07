@@ -65,8 +65,8 @@ class AWS_Runner:
 
 
     def installation_thread(self, params):
-        self.conn.run_commands(params[0], params[1])
         self.conn.transfer_files(params[0], params[2], params[3])
+        self.conn.run_commands(params[0], params[1])
 
 
     def data_collection_thread(self, params):

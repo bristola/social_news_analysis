@@ -4,7 +4,7 @@ import psycopg2
 
 class External_Connector:
 
-    def __init__(self, pem_name, database_ip, collector_user="ubuntu", database_name="postgres", database_user="postgres", database_password="postgres"):
+    def __init__(self, pem_name, database_ip, collector_user="ubuntu", database_name="postgres", database_user="postgres", database_password="admin"):
         self.pem_name = pem_name
         self.database_ip = database_ip
         self.collector_user = collector_user
@@ -23,11 +23,15 @@ class External_Connector:
 
 
     def execute_insertion(self, insert_str):
-        conn = psycopg2.connect(dbname=self.database_name, schemhost=self.database_ip, user=self.database_user, password=self.database_password)
-        with conn.cursor() as cur:
-            cur.execute(insert_str)
-        if conn is not None:
-            conn.close()
+        try:
+            conn = psycopg2.connect(dbname=self.database_name, host=self.database_ip, user=self.database_user, password=self.database_password)
+            with conn.cursor() as cur:
+                cur.execute(insert_str)
+            conn.commit()
+            if conn is not None:
+                conn.close()
+        except Exception as e:
+            pass
 
 
     def insert_sentiment(self, run_id, type, sentiment_dict):
@@ -40,3 +44,6 @@ class External_Connector:
 
     def insert_emoticon(self, run_id, type, emoticon_dict):
         pass
+
+# ec = External_Connector(None, 'DATABASE_IP')
+# ec.execute_insertion("INSERT INTO JOBS (TOPIC) VALUES ('NEW TEST');")
