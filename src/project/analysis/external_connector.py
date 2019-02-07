@@ -33,13 +33,13 @@ class External_Connector:
             pass
 
 
-    def insert_sentiment(self, sentiment_dict):
+    def insert_sentiment(self, run_id, type, sentiment_dict):
         pass
 
 
-    def insert_mood(self, mood_dict):
+    def insert_mood(self, run_id, type, mood_dict):
         pass
 
 
-    def insert_emoticon(self, emoticon_dict):
+    def insert_emoticon(self, run_id, type, emoticon_dict):
         pass

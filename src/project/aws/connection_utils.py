@@ -13,10 +13,10 @@ class Connection_Utils:
 
 
     def run_commands(self, ip, commands):
-        lock = Lock()
-        lock.acquire()
         client = SSHClient()
         client.set_missing_host_key_policy(AutoAddPolicy())
+        lock = Lock()
+        lock.acquire()
         client.connect(ip, username=self.username, key_filename=self.pem_location)
         lock.release()
         for command in commands:
@@ -26,10 +26,10 @@ class Connection_Utils:
 
 
     def transfer_files(self, ip, files, destinations):
-        lock = Lock()
-        lock.acquire()
         client = SSHClient()
         client.set_missing_host_key_policy(AutoAddPolicy())
+        lock = Lock()
+        lock.acquire()
         client.connect(ip, username=self.username, key_filename=self.pem_location)
         lock.release()
         with SCPClient(client.get_transport()) as scp_conn:
