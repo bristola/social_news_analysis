@@ -35,15 +35,33 @@ class External_Connector:
 
 
     def insert_sentiment(self, run_id, type, sentiment_dict):
-        pass
+        insert_str = "INSERT INTO SENTIMENT (RUN_ID, TYPE, VALUE, WEIGHT) VALUES "
+        addition_frag = "(%d, '%s', %0.8f, %d)"
+        frags = list()
+        for value, weight in sentiment_dict.items():
+            addition_frag.append(addition_frag % (run_id, type, value, weight))
+        insert_str += ','.join(frags)
+        self.execute_insertion(insert_str)
 
 
     def insert_mood(self, run_id, type, mood_dict):
-        pass
+        insert_str = "INSERT INTO MOOD (RUN_ID, TYPE, MOOD, AMOUNT) VALUES "
+        addition_frag = "(%d, '%s', '%s', %d)"
+        frags = list()
+        for mood, amount in mood_dict.items():
+            addition_frag.append(addition_frag % (run_id, type, mood, amount))
+        insert_str += ','.join(frags)
+        self.execute_insertion(insert_str)
 
 
     def insert_emoticon(self, run_id, type, emoticon_dict):
-        pass
+        insert_str = "INSERT INTO EMOTICON (RUN_ID, TYPE, EMOTE, AMOUNT) VALUES "
+        addition_frag = "(%d, '%s', '%s', %d)"
+        frags = list()
+        for emote, amount in emoticon_dict.items():
+            addition_frag.append(addition_frag % (run_id, type, emote, amount))
+        insert_str += ','.join(frags)
+        self.execute_insertion(insert_str)
 
 # ec = External_Connector(None, 'DATABASE_IP')
 # ec.execute_insertion("INSERT INTO JOBS (TOPIC) VALUES ('NEW TEST');")
