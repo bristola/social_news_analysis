@@ -35,6 +35,8 @@ class External_Connector:
 
 
     def insert_sentiment(self, run_id, type, sentiment_dict):
+        if len(sentiment_dict) == 0:
+            return
         insert_str = "INSERT INTO SENTIMENT (RUN_ID, TYPE, VALUE, WEIGHT) VALUES "
         addition_frag = "(%d, '%s', %0.8f, %d)"
         frags = list()
@@ -45,6 +47,8 @@ class External_Connector:
 
 
     def insert_mood(self, run_id, type, mood_dict):
+        if len(mood_dict) == 0:
+            return
         insert_str = "INSERT INTO MOOD (RUN_ID, TYPE, MOOD, AMOUNT) VALUES "
         addition_frag = "(%d, '%s', '%s', %d)"
         frags = list()
@@ -55,6 +59,8 @@ class External_Connector:
 
 
     def insert_emoticon(self, run_id, type, emoticon_dict):
+        if len(emoticon_dict) == 0:
+            return
         insert_str = "INSERT INTO EMOTICON (RUN_ID, TYPE, EMOTE, AMOUNT) VALUES "
         addition_frag = "(%d, '%s', '%s', %d)"
         frags = list()

@@ -123,8 +123,8 @@ class Analyzer:
         return sentiment, mood, emoticon
 
 
-a = Analyzer()
-sentiment, mood, emoticon = a.run("Twitter", "test.txt")
-print(sentiment)
-print(mood)
-print(emoticon)
+# a = Analyzer()
+# sentiment, mood, emoticon = a.run("Twitter", "test.txt")
+# print(sentiment)
+# print(mood)
+# print(emoticon)
