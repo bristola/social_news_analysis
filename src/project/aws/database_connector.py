@@ -10,6 +10,10 @@ class Database_Connector:
 
 
     def execute_selection(self, select_str):
+        """
+        Executes the SQL Select statement on the database and return the
+        results.
+        """
         results = None
         try:
             conn = psycopg2.connect(dbname=self.database_name, host=self.database_ip, user=self.database_user, password=self.database_password)

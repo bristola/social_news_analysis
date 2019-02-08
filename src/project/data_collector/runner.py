@@ -13,13 +13,16 @@ parser.add_argument("access_token_secret", nargs='?', default=None, help="Access
 
 args = parser.parse_args()
 
+# Twitter data collection type needs all four API credentials in order to run
 if args.type == "Twitter" and None in (args.api_secret_key, args.access_token, args.access_token_secret):
     print("You must have an api_key, api_secret_key, access_token, and access_token_secret when collecting Twitter data")
 else:
     if args.type == "Twitter":
+        # Execute data collection for twitter data
         t = Twitter_Collector(args.api_key, args.api_secret_key, args.access_token, args.access_token_secret)
         t.run(args.topic, 25)
     elif args.type == "News":
+        # Execute data collection for news data
         t = News_Collector(args.api_key)
         t.run(args.topic, 5)
     else:

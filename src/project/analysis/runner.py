@@ -4,6 +4,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 
+# Arguments
 parser.add_argument("run_id", help="The run ID for the results being placed into the database.")
 parser.add_argument("pem_name", help="Name of the PEM file that is needed to connect to the data collection servers.")
 parser.add_argument("database_ip", help="IP of the Postgres database that the results will be put into.")
@@ -13,6 +14,7 @@ args = parser.parse_args()
 
 ec = External_Connector(args.pem_name, args.database_ip)
 
+# Create list of local files, first is twitter data, rest is news data
 files = ["twitter.txt"]
 files.extend(["news%d.txt" % (i) for i in range(1, len(args.data_collector_ips))])
 
@@ -21,6 +23,7 @@ ec.get_data_files(args.data_collector_ips, files)
 a = Analyzer()
 
 type = "Twitter"
+# Run three analyses for each data file and upload them to database
 for f in files:
     sentiment, mood, emoticon = a.run(type, f)
     ec.insert_sentiment(args.run_id, type, sentiment)
