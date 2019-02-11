@@ -1,6 +1,6 @@
 ALTER USER postgres PASSWORD 'admin';
 
-CREATE TABLE JOBS (
+CREATE TABLE JOB (
     ID          SERIAL PRIMARY KEY,
     TOPIC       VARCHAR(20)
 );

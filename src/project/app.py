@@ -1,5 +1,6 @@
 from config.config import Config
 from aws.aws_runner import AWS_Runner
+from graphing.graph import Graphing
 from flask import render_template, Flask, Response, redirect, url_for, request, abort
 import time
 
@@ -10,6 +11,8 @@ app = Flask(__name__)
 # Set up variables needed for execution
 conf = Config()
 conf_contents = conf.get_config_contents()
+
+graphing = Graphing()
 
 aws = AWS_Runner(conf_contents['AWS Key Name'],
                  conf_contents['AWS Machine Type'],
@@ -93,7 +96,8 @@ def run_system(topic):
 
     # Run code from executor.py
     ips = [value for key, value in conf.get_session_contents().items() if "IP" in key]
-    aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    graphs = graphing.create_visualizations(run_id)
 
     return render_template("results.html")
 

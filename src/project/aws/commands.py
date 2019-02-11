@@ -56,3 +56,5 @@ database_destinations = ["database_schema.sql"]
 data_exec_twitter = "python3 runner.py Twitter %s %s %s %s %s"
 
 data_exec_news = "python3 runner.py News %s %s"
+
+analtyics_exec = "python3 runner.py %s %s %s %s %s"
