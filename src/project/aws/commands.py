@@ -38,9 +38,19 @@ analytics_cmd = ["sudo apt-get update",
                  "sudo pip3 install -U textblob",
                  "python3 -m textblob.download_corpora"]
 
-analytics_files = ["analysis/analysis.py"]
+analytics_files = ["analysis/analysis.py",
+                   "analysis/emotions.py",
+                   "analysis/external_connector.py",
+                   "analysis/extra_words.py",
+                   "analysis/runner.py",
+                   "analysis/stop_words.py"]
 
-analytics_destinations = ["analysis.py"]
+analytics_destinations = ["analysis.py",
+                          "emotions.py",
+                          "external_connector.py",
+                          "extra_words.py",
+                          "runner.py",
+                          "stop_words.py"]
 
 database_cmd = ["sudo apt-get update",
                 "sudo apt-get install -y postgresql postgresql-contrib",

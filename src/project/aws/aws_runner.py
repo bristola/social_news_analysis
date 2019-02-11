@@ -38,7 +38,12 @@ class AWS_Runner:
 
 
     def execute_system(self, session, config, topic, job_id=None):
-
+        """
+        Run the actual system, including the data collection and data analytics.
+        Inputs the session data, the configuration data, and a specified topic.
+        Also, option to enter an existing job_id that we are rerunning. After it
+        will return the run_id that is associated with the results.
+        """
         database = Database_Connector(session['Database IP'])
 
         # Insert Job into database if it's a new job
