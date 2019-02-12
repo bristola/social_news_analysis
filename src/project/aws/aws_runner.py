@@ -48,14 +48,10 @@ class AWS_Runner:
 
         # Insert Job into database if it's a new job
         if (job_id is None):
-            print("Adding Job to database")
             job_id = database.create_new_job(topic)
-            print(job_id)
 
         # Insert Run into database and save it's ID for the analytics code
-        print("Adding Run to database")
         run_id = database.create_new_run(job_id)
-        print(run_id)
 
         # Data collection commands to be executed. Put in data from configuration
         command1 = commands.data_exec_twitter % (topic, config['Twitter API key'], config['Twitter API secret key'], config['Twitter Access token'], config['Twitter Access token secret'])
@@ -68,18 +64,12 @@ class AWS_Runner:
         ]
 
         # Carry out threading execution and await completion of data collection
-        print("Running commands:")
-        print(command1)
-        print(command2)
-        print(session['Twitter Collector IP'])
-        print(session['News Collector IP'])
         pool = ThreadPool(2)
         pool.map(self.command_run_thread, parameters)
         pool.close()
         pool.join()
 
         # Transfer data to analytics machines (Need to transfer PEM file aswell from config)
-        print("Transfering pem files...")
         self.conn.transfer_files(session['Twitter Analyzer IP'], [config['Path to pem']], [config['AWS Key Name']+".pem"])
         self.conn.transfer_files(session['News Analyzer IP'], [config['Path to pem']], [config['AWS Key Name']+".pem"])
 
@@ -93,11 +83,6 @@ class AWS_Runner:
         ]
 
         # Carry out threading execution and await completion of data analytics
-        print("Running commands:")
-        print(command1)
-        print(command2)
-        print(session['Twitter Analyzer IP'])
-        print(session['News Analyzer IP'])
         pool = ThreadPool(2)
         pool.map(self.command_run_thread, parameters)
         pool.close()
