@@ -1,5 +1,7 @@
 import psycopg2
 
+# pip install psycopg2
+
 class Database_Connector:
 
     def __init__(self, database_ip, database_name="postgres", database_user="postgres", database_password="admin"):
