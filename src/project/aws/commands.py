@@ -34,6 +34,9 @@ news_destinations = ["runner.py",
 
 analytics_cmd = ["sudo apt-get update",
                  "sudo apt-get install -y python3-pip",
+                 "sudo pip3 install paramiko",
+                 "sudo pip3 install scp",
+                 "sudo pip3 install psycopg2",
                  "sudo pip3 install --upgrade pip",
                  "sudo pip3 install -U textblob",
                  "python3 -m textblob.download_corpora"]

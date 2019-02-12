@@ -34,30 +34,27 @@ class Database_Connector:
         Inserts data into database using given SQL statement.
         """
         return_val = None
-        try:
-            conn = psycopg2.connect(dbname=self.database_name, host=self.database_ip, user=self.database_user, password=self.database_password)
-            # Execute insert statement using cursor
-            with conn.cursor() as cur:
-                cur.execute(insert_str)
-                return_val = cur.fetchone([0])
-            # Commit changes to database
-            conn.commit()
-            if conn is not None:
-                conn.close()
-        except Exception as e:
-            pass
+        conn = psycopg2.connect(dbname=self.database_name, host=self.database_ip, user=self.database_user, password=self.database_password)
+        # Execute insert statement using cursor
+        with conn.cursor() as cur:
+            cur.execute(insert_str)
+            return_val = cur.fetchone()[0]
+        # Commit changes to database
+        conn.commit()
+        if conn is not None:
+            conn.close()
         return return_val
 
 
     def create_new_job(self, topic):
-        insert_str = "INSERT INTO JOB (TOPIC) VALUES ('%s')" % (topic)
-        job_id = execute_insertion(insert_str)
+        insert_str = "INSERT INTO JOB (TOPIC) VALUES ('%s') RETURNING ID" % (str(topic))
+        job_id = self.execute_insertion(insert_str)
         return job_id
 
 
     def create_new_run(self, job_id):
-        insert_str = "INSERT INTO RUN (TOPIC) VALUES (%s)" % (job_id)
-        run_id = execute_insertion(insert_str)
+        insert_str = "INSERT INTO RUN (JOB_ID, RUN_TIME) VALUES (%s, CURRENT_TIMESTAMP) RETURNING ID" % (str(job_id))
+        run_id = self.execute_insertion(insert_str)
         return run_id
 
 

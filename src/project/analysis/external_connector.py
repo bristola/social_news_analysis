@@ -53,11 +53,11 @@ class External_Connector:
             return
         insert_str = "INSERT INTO SENTIMENT (RUN_ID, TYPE, VALUE, WEIGHT) VALUES "
         # Fragment to be added to end of insert statement
-        addition_frag = "(%d, '%s', %0.8f, %d)"
+        addition_frag = "(%s, '%s', %0.8f, %d)"
         frags = list()
         for value, weight in sentiment_dict.items():
             # Fill in blanks of the fragment with current data values
-            addition_frag.append(addition_frag % (run_id, type, value, weight))
+            frags.append(addition_frag % (run_id, type, value, weight))
         # Create multi insert statement
         insert_str += ','.join(frags)
         self.execute_insertion(insert_str)
@@ -71,11 +71,11 @@ class External_Connector:
             return
         insert_str = "INSERT INTO MOOD (RUN_ID, TYPE, MOOD, AMOUNT) VALUES "
         # Fragment to be added to end of insert statement
-        addition_frag = "(%d, '%s', '%s', %d)"
+        addition_frag = "(%s, '%s', '%s', %d)"
         frags = list()
         for mood, amount in mood_dict.items():
             # Fill in blanks of the fragment with current data values
-            addition_frag.append(addition_frag % (run_id, type, mood, amount))
+            frags.append(addition_frag % (run_id, type, mood, amount))
         # Create multi insert statement
         insert_str += ','.join(frags)
         self.execute_insertion(insert_str)
@@ -89,11 +89,11 @@ class External_Connector:
             return
         insert_str = "INSERT INTO EMOTICON (RUN_ID, TYPE, EMOTE, AMOUNT) VALUES "
         # Fragment to be added to end of insert statement
-        addition_frag = "(%d, '%s', '%s', %d)"
+        addition_frag = "(%s, '%s', '%s', %d)"
         frags = list()
         for emote, amount in emoticon_dict.items():
             # Fill in blanks of the fragment with current data values
-            addition_frag.append(addition_frag % (run_id, type, emote, amount))
+            frags.append(addition_frag % (run_id, type, emote, amount))
         # Create multi insert statement
         insert_str += ','.join(frags)
         self.execute_insertion(insert_str)
