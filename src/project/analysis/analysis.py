@@ -3,9 +3,7 @@ from nltk.sentiment.vader import SentimentIntensityAnalyzer
 from nltk import tokenize
 from nltk.stem import WordNetLemmatizer
 import re
-from stop_words import stop_words
-from extra_words import extra_words
-from emotions import *
+from words import *
 
 class Analyzer:
 
