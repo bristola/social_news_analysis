@@ -1,5 +1,6 @@
 from config.config import Config
 from aws.aws_runner import AWS_Runner
+from aws.database_connector import Database_Connector
 from graphing.graph import Graphing
 from flask import render_template, Flask, Response, redirect, url_for, request, abort
 import time
@@ -56,16 +57,7 @@ def setup_instances():
     # Create a session and add all information to it
     conf.create_session()
 
-    conf.add_to_session("Twitter Collector ID", ids[0])
-    conf.add_to_session("Twitter Collector IP", ips[0])
-    conf.add_to_session("News Collector ID", ids[1])
-    conf.add_to_session("News Collector IP", ips[1])
-    conf.add_to_session("Twitter Analyzer ID", ids[2])
-    conf.add_to_session("Twitter Analyzer IP", ips[2])
-    conf.add_to_session("News Analyzer ID", ids[3])
-    conf.add_to_session("News Analyzer IP", ips[3])
-    conf.add_to_session("Database ID", ids[4])
-    conf.add_to_session("Database IP", ips[4])
+    conf.add_session_info(ids, ips)
 
     return redirect(url_for('home_get'))
 
@@ -92,14 +84,16 @@ def run_system(topic):
     if not conf.check_session():
         return redirect(url_for('home_get'))
 
-    print("Running system with topic:", topic)
-
     # Run code from executor.py
     ips = [value for key, value in conf.get_session_contents().items() if "IP" in key]
     run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
     graphs = graphing.create_visualizations(run_id)
 
-    return render_template("results.html")
+    dc = Database_Connector(conf.get_session_contents()['Database IP'])
+
+    emotes = [emote for emote, amount in dc.get_emoticon_totals().items()]
+
+    return render_template("results.html", emotes = emotes)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,12 @@
 <!doctype html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
     <body>
         Results
+        {% for emote in emotes %}
+            <div>{{ emote }}</div>
+        {% endfor %}
     </body>
 </html>

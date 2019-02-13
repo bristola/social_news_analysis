@@ -54,6 +54,19 @@ class Config:
             session.write(line)
 
 
+    def add_session_info(self, ids, ips):
+        self.add_to_session("Twitter Collector ID", ids[0])
+        self.add_to_session("Twitter Collector IP", ips[0])
+        self.add_to_session("News Collector ID", ids[1])
+        self.add_to_session("News Collector IP", ips[1])
+        self.add_to_session("Twitter Analyzer ID", ids[2])
+        self.add_to_session("Twitter Analyzer IP", ips[2])
+        self.add_to_session("News Analyzer ID", ids[3])
+        self.add_to_session("News Analyzer IP", ips[3])
+        self.add_to_session("Database ID", ids[4])
+        self.add_to_session("Database IP", ips[4])
+
+
     def check_session(self):
         if os.path.isfile(self.session_file) and os.access(self.session_file, os.R_OK):
             return True
