@@ -34,26 +34,21 @@ news_destinations = ["runner.py",
 
 analytics_cmd = ["sudo apt-get update",
                  "sudo apt-get install -y python3-pip",
+                 "sudo pip3 install --upgrade pip",
                  "sudo pip3 install paramiko",
                  "sudo pip3 install scp",
                  "sudo pip3 install psycopg2",
-                 "sudo pip3 install --upgrade pip",
-                 "sudo pip3 install -U textblob",
-                 "python3 -m textblob.download_corpora"]
+                 "sudo pip3 install nltk"]
 
 analytics_files = ["analysis/analysis.py",
-                   "analysis/emotions.py",
                    "analysis/external_connector.py",
-                   "analysis/extra_words.py",
                    "analysis/runner.py",
-                   "analysis/stop_words.py"]
+                   "analysis/words.py"]
 
 analytics_destinations = ["analysis.py",
-                          "emotions.py",
                           "external_connector.py",
-                          "extra_words.py",
                           "runner.py",
-                          "stop_words.py"]
+                          "words.py"]
 
 database_cmd = ["sudo apt-get update",
                 "sudo apt-get install -y postgresql postgresql-contrib",

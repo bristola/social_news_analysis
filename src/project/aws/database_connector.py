@@ -47,27 +47,42 @@ class Database_Connector:
 
 
     def create_new_job(self, topic):
-        insert_str = "INSERT INTO JOB (TOPIC) VALUES ('%s') RETURNING ID" % (str(topic))
+        insert_str = new_job % (str(topic))
         job_id = self.execute_insertion(insert_str)
         return job_id
 
 
     def create_new_run(self, job_id):
-        insert_str = "INSERT INTO RUN (JOB_ID, RUN_TIME) VALUES (%s, CURRENT_TIMESTAMP) RETURNING ID" % (str(job_id))
+        insert_str = new_run % (str(job_id))
         run_id = self.execute_insertion(insert_str)
         return run_id
 
 
-    def get_sentiment_groups(self):
-        pass
-
-
     def get_sentiment_totals(self):
-        pass
+        results = self.execute_selection(twitter_sentiment)
+        twitter = results[0][0]
+        results = self.execute_selection(news_sentiment)
+        news = results[0][0]
+        return twitter, news
+
+
+    def get_sentiment_groups(self):
+        fifths = list()
+        for group in sentiment_groups:
+            results = self.execute_selection(group)
+            fifths.append(results[0][0])
+        return fifths
 
 
     def get_mood_totals(self):
-        pass
+        results = self.execute_selection(twitter_mood)
+        twitter_moods = [{"mood": i[0], "amount": i[1]} for i in results]
+        results = self.execute_selection(news_mood)
+        news_moods = [{"mood": i[0], "amount": i[1]} for i in results]
+        return twitter_moods, news_moods
+
 
     def get_emoticon_totals(self):
-        pass
+        results = self.execute_selection(emoticon)
+        emotes = [{"emote": i[0], "amount": i[1]} for i in results]
+        return emotes
