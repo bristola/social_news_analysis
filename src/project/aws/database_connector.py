@@ -1,5 +1,5 @@
 import psycopg2
-from sql_statements import *
+from aws.sql_statements import *
 
 # pip install psycopg2
 
