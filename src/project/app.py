@@ -85,7 +85,6 @@ def run_system(topic):
         return redirect(url_for('home_get'))
 
     # Run code from executor.py
-    ips = [value for key, value in conf.get_session_contents().items() if "IP" in key]
     run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
     graphs = graphing.create_visualizations(run_id)
 
