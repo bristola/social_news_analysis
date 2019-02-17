@@ -17,7 +17,6 @@ class Graphing:
 
 
     def sentiment_groups_graph(self, data):
-        data = [13143, 77600, 96184, 33605, 3282]
         plt.clf()
 
         objects = ("Very Negative","Negative","Neutral","Positive","Very Positive")
