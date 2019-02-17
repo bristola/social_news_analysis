@@ -24,38 +24,55 @@ class Graphing:
 
     def mood_totals_graph(self, data):
 
-        # Test data
-        data = {
-            "happiness": 100,
-            "anxiety": 73,
-            "sadness": 90,
-            "affection": 55,
-            "aggression": 30,
-            "expressive": 70,
-            "glory": 39
-        }
+        twitter_data = data[0]
+
+        news_data = data[1]
 
         plt.clf()
 
-        categories = [mood for mood, amount in data.items()]
-        values = [amount for mood, amount in data.items()]
-        N = len(values)
-        angles = [n / float(N) * 2 * pi for n in range(0, N)]
+        colors = {
+        "happiness": "springgreen",
+        "anxiety": "slategrey",
+        "sadness": "royalblue",
+        "affection": "mediumorchid",
+        "aggression": "firebrick",
+        "expressive": "lightpink",
+        "glory": "goldenrod"
+        }
 
-        ax = plt.subplot(111, projection='polar', clip_on=False)
-        bars = ax.bar(angles, values, width=.885, bottom=0.0)
+        out_colors = list()
+        out_categories = list()
+        out_data = list()
+        for category, amount in twitter_data.items():
+            out_colors.append(colors[category])
+            out_categories.append(category)
+            out_data.append(amount)
 
-        colors = ["orange","k","b","m","r","g","y"]
-        for value, category, angle, bar, color in zip(values, categories, angles, bars, colors):
-            bar.set_color(color)
-            bar.set_alpha(0.5)
-            ax.text(angle, value+10, category, size=15, horizontalalignment="center", verticalalignment="center")
+        explode = (0.1, 0, 0, 0, 0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
 
-        ax.spines['polar'].set_visible(False)
-        ax.get_xaxis().set_visible(False)
-        m = max(values)
-        ax.set_rlabel_position(0)
-        ax.get_yaxis().set_ticks([m,3*m/4,m/2,m/4])
+        fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(8, 6))
+        plt.subplots_adjust(wspace=.5)
+        ax1.pie(out_data, explode=explode, labels=out_categories, autopct='%1.1f%%',
+                shadow=True, startangle=90, colors=out_colors)
+        ax1.axis('equal')
+        ax1.set_title("Twitter", y=.1)
+
+        out_colors = list()
+        out_categories = list()
+        out_data = list()
+        for category, amount in news_data.items():
+            out_colors.append(colors[category])
+            out_categories.append(category)
+            out_data.append(amount)
+
+        explode = (0.1, 0, 0, 0, 0, 0, 0)  # only "explode" the 2nd slice (i.e. 'Hogs')
+
+        ax2.pie(out_data, explode=explode, labels=out_categories, autopct='%1.1f%%',
+                shadow=True, startangle=100, colors=out_colors)
+        ax2.axis('equal')
+        ax2.set_title("News", y=.1)
+
+        plt.suptitle("Mood Words", y=.8)
 
         plt.show()
 
