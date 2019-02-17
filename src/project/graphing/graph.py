@@ -12,7 +12,27 @@ class Graphing:
 
     def sentiment_totals_graph(self, data):
         plt.clf()
-        plt.plot([1,2,3,4])
+
+        data = [-0.09159018091433064956,0.12406316863636363636]
+        categories = ("Twitter", "News")
+
+        fig, ax = plt.subplots(figsize=(20, 2))
+
+        bars = ax.barh(range(0,len(data)), data, align='edge', height=1.0, color="khaki")
+        colors = ["darkred","forestgreen"]
+        for bar, d in zip(bars, data):
+            bar.set_color(colors[0] if d < 0 else colors[1])
+        ax.spines['left'].set_visible(False)
+        ax.spines['top'].set_visible(False)
+        ax.spines['right'].set_visible(False)
+        ax.set_yticks(range(0,len(data)))
+        ax.set_yticklabels([])
+        ax.invert_yaxis()  # labels read top-to-bottom
+        ax.set_xlabel('Performance')
+        ax.set_title('How fast do you want to go today?')
+
+        plt.show()
+
         return self.plot_to_base()
 
 
@@ -108,7 +128,6 @@ class Graphing:
         for gf, d in zip(graph_funcs, data):
             viz = getattr(self, gf)
             graphs.append(viz(d))
-        print(graphs[2])
         return graphs
 
 
