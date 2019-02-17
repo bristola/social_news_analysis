@@ -40,15 +40,24 @@ class Graphing:
         categories = [mood for mood, amount in data.items()]
         values = [amount for mood, amount in data.items()]
         N = len(values)
-        angles = [n / float(N) * 2 * pi for n in range(N)]
+        angles = [n / float(N) * 2 * pi for n in range(0, N)]
 
-        ax = plt.subplot(111, projection='polar')
-        bars = ax.bar(angles, values, width=.65, bottom=0.0)
+        ax = plt.subplot(111, projection='polar', clip_on=False)
+        bars = ax.bar(angles, values, width=.885, bottom=0.0)
 
         colors = ["orange","k","b","m","r","g","y"]
-        for bar, color in zip(bars, colors):
+        for value, category, angle, bar, color in zip(values, categories, angles, bars, colors):
             bar.set_color(color)
             bar.set_alpha(0.5)
+            ax.text(angle, value+10, category, size=15, horizontalalignment="center", verticalalignment="center")
+
+        ax.spines['polar'].set_visible(False)
+        ax.get_xaxis().set_visible(False)
+        m = max(values)
+        ax.set_rlabel_position(0)
+        ax.get_yaxis().set_ticks([m,3*m/4,m/2,m/4])
+
+        plt.show()
 
         return self.plot_to_base()
 
