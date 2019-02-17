@@ -17,8 +17,19 @@ class Graphing:
 
 
     def sentiment_groups_graph(self, data):
+        data = [13143, 77600, 96184, 33605, 3282]
         plt.clf()
-        plt.plot([4,3,2,1])
+
+        objects = ("Very Negative","Negative","Neutral","Positive","Very Positive")
+        bars = plt.bar(range(0, len(data)), data, align='center', alpha=0.8)
+        colors = ["darkred","indianred","khaki","palegreen","forestgreen"]
+        for bar, color in zip(bars, colors):
+            bar.set_color(color)
+        plt.xticks(range(0,len(data)), objects)
+        plt.xlabel("Sentiment")
+        plt.ylabel("Number of Views")
+        plt.title("Views in Different Sentiment Groups")
+
         return self.plot_to_base()
 
 
@@ -73,8 +84,6 @@ class Graphing:
         ax2.set_title("News", y=.1)
 
         plt.suptitle("Mood Words", y=.8)
-
-        plt.show()
 
         return self.plot_to_base()
 
