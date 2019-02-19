@@ -2,36 +2,40 @@ import matplotlib.pyplot as plt
 import numpy as np
 from io import BytesIO
 import base64
+from matplotlib import rc
 from math import pi
 
 class Graphing:
 
     def __init__(self):
-        pass
+        rc('text', usetex=True)
 
 
     def sentiment_totals_graph(self, data):
         plt.clf()
 
         data = [-0.09159018091433064956,0.12406316863636363636]
+        range_pos = max([abs(d) for d in data])
         categories = ("Twitter", "News")
 
         fig, ax = plt.subplots(figsize=(20, 2))
+        plt.subplots_adjust(left=0.1, right=0.9, top=.7, bottom=0.2)
 
-        bars = ax.barh(range(0,len(data)), data, align='edge', height=1.0, color="khaki")
+        bars = ax.barh(range(0,len(data)), data, align='edge', height=.7, color="khaki")
         colors = ["darkred","forestgreen"]
-        for bar, d in zip(bars, data):
+        for bar, d, category in zip(bars, data, categories):
             bar.set_color(colors[0] if d < 0 else colors[1])
+            ax.text(bar.get_x(), bar.get_y() - .05, r'\textbf{%s}' % (category), fontweight='bold', horizontalalignment='center')
+        for i, v in enumerate(data):
+            ax.text(v, i-.05, str("%.3f" % v), horizontalalignment='center')
         ax.spines['left'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
-        ax.set_yticks(range(0,len(data)))
+        ax.set_yticks([])
         ax.set_yticklabels([])
+        ax.set_xlim([range_pos * -1, range_pos])
         ax.invert_yaxis()  # labels read top-to-bottom
-        ax.set_xlabel('Performance')
-        ax.set_title('How fast do you want to go today?')
-
-        plt.show()
+        ax.set_title(r'\textbf{\underline{Overall Sentiment}}', fontweight='bold', fontsize=18, y=1.25, horizontalalignment='center')
 
         return self.plot_to_base()
 
