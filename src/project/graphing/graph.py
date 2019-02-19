@@ -4,11 +4,14 @@ from io import BytesIO
 import base64
 from matplotlib import rc
 from math import pi
+# from matplotlib.figure_manager import fontManager as fm
 
 class Graphing:
 
     def __init__(self):
-        rc('text', usetex=True)
+        # rc('font', family='LastResort')
+        # fm.findfont('symbola')
+        pass
 
 
     def sentiment_totals_graph(self, data):
@@ -57,12 +60,11 @@ class Graphing:
 
 
     def mood_totals_graph(self, data):
+        plt.clf()
 
         twitter_data = data[0]
 
         news_data = data[1]
-
-        plt.clf()
 
         colors = {
         "happiness": "springgreen",
@@ -112,8 +114,28 @@ class Graphing:
 
 
     def emoticon_totals_graph(self, data):
+        data = {
+            '😂': 12,
+            '🇺': 8,
+            '🇸': 8,
+            '🏻': 7,
+            '👇': 6,
+            '🥕': 6,
+            '\U0001f92c': 5,
+            '😡': 5,
+            '\U0001f92a': 4,
+            '🤔': 4
+        }
         plt.clf()
-        plt.plot([4,3,2,4])
+
+        bars = plt.bar(range(0, len(data.values())), data.values(), align='center', alpha=0.8)
+        plt.xticks(range(0,len(data)), data.keys(), fontname='Apple Color Emoji')
+        plt.xlabel("Emotoicon")
+        plt.ylabel("Number of Occurences")
+        plt.title("Most Used Emoticons")
+
+        plt.show()
+
         return self.plot_to_base()
 
 

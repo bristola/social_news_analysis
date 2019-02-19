@@ -9,6 +9,7 @@
 {'aggression': 844, 'affection': 391, 'glory': 164, 'anxiety': 137, 'happiness': 79, 'expressive': 67, 'sadness': 53}
 
 
+{
 '😂': 12
 '🇺': 8
 '🇸': 8
@@ -19,3 +20,4 @@
 '😡': 5
 '\U0001f92a': 4
 '🤔': 4
+}
