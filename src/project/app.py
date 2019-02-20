@@ -90,9 +90,16 @@ def run_system(topic):
 
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
-    emotes = [emote for emote, amount in dc.get_emoticon_totals().items()]
+    twitter_sent, news_sent = dc.get_sentiment_totals(run_id)
+    fifths = dc.get_sentiment_groups(run_id)
+    twitter_moods, news_moods = dc.get_mood_totals(run_id)
+    emotes = dc.get_emoticon_totals(run_id)
 
-    return render_template("results.html", emotes = emotes)
+    data = [[twitter_sent, news_sent],fifths,[twitter_moods,news_moods]]
+
+    graphs = dc.create_visualizations(data)
+
+    return render_template("results.html", graphs = graphs)
 
 
 if __name__ == "__main__":

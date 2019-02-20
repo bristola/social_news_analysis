@@ -68,49 +68,49 @@ class Database_Connector:
         return run_id
 
 
-    def get_sentiment_totals(self):
+    def get_sentiment_totals(self, run_id):
         """
         Executes SQL select to get total sentiment across both types of data.
         """
-        results = self.execute_selection(twitter_sentiment)
+        results = self.execute_selection(twitter_sentiment % (str(run_id)))
         twitter = results[0][0]
-        results = self.execute_selection(news_sentiment)
+        results = self.execute_selection(news_sentiment % (str(run_id)))
         news = results[0][0]
         return twitter, news
 
 
-    def get_sentiment_groups(self):
+    def get_sentiment_groups(self, run_id):
         """
         Breaks sentiment results into 5 sections and counts totals in each.
         """
         fifths = list()
         for group in sentiment_groups:
-            results = self.execute_selection(group)
+            results = self.execute_selection(group % (str(run_id)))
             fifths.append(results[0][0])
         return fifths
 
 
-    def get_mood_totals(self):
+    def get_mood_totals(self, run_id):
         """
         Gets the total counts of each emotion type for each type of data.
         """
         twitter_moods = dict()
-        results = self.execute_selection(twitter_mood)
+        results = self.execute_selection(twitter_mood % (str(run_id)))
         for result in results:
             twitter_moods[result[0]] = result[1]
         news_moods = dict()
-        results = self.execute_selection(news_mood)
+        results = self.execute_selection(news_mood % (str(run_id)))
         for result in results:
             news_moods[result[0]] = result[1]
         return twitter_moods, news_moods
 
 
-    def get_emoticon_totals(self):
+    def get_emoticon_totals(self, run_id):
         """
         Collects the top 10 most used emoticons in our data collection.
         """
         emotes = dict()
-        results = self.execute_selection(emoticon)
+        results = self.execute_selection(emoticon % (str(run_id)))
         for result in results:
             emotes[result[0]] = result[1]
         return emotes

@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from io import BytesIO
 import base64
+import os
+from matplotlib import font_manager as fm, rcParams
 from matplotlib import rc
 from math import pi
 # from matplotlib.figure_manager import fontManager as fm
@@ -17,7 +19,6 @@ class Graphing:
     def sentiment_totals_graph(self, data):
         plt.clf()
 
-        data = [-0.09159018091433064956,0.12406316863636363636]
         range_pos = max([abs(d) for d in data])
         categories = ("Twitter", "News")
 
@@ -113,32 +114,6 @@ class Graphing:
         return self.plot_to_base()
 
 
-    def emoticon_totals_graph(self, data):
-        data = {
-            '😂': 12,
-            '🇺': 8,
-            '🇸': 8,
-            '🏻': 7,
-            '👇': 6,
-            '🥕': 6,
-            '\U0001f92c': 5,
-            '😡': 5,
-            '\U0001f92a': 4,
-            '🤔': 4
-        }
-        plt.clf()
-
-        bars = plt.bar(range(0, len(data.values())), data.values(), align='center', alpha=0.8)
-        plt.xticks(range(0,len(data)), data.keys(), fontname='Apple Color Emoji')
-        plt.xlabel("Emotoicon")
-        plt.ylabel("Number of Occurences")
-        plt.title("Most Used Emoticons")
-
-        plt.show()
-
-        return self.plot_to_base()
-
-
     def plot_to_base(self):
         t = BytesIO()
         plt.savefig(t)
@@ -150,14 +125,10 @@ class Graphing:
 
     def create_visualizations(self, data):
         graphs = list()
-        graph_funcs = ["sentiment_totals_graph","sentiment_groups_graph","mood_totals_graph","emoticon_totals_graph"]
+        graph_funcs = ["sentiment_totals_graph","sentiment_groups_graph","mood_totals_graph"]
+        self.emoticon_totals_graph(data)
         for gf, d in zip(graph_funcs, data):
             viz = getattr(self, gf)
             graphs.append(viz(d))
+        print('\n\n'.join(graphs))
         return graphs
-
-
-
-if __name__ == '__main__':
-    g = Graphing()
-    g.create_visualizations(["One","Two","Three","Four"])
