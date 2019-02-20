@@ -85,8 +85,8 @@ def run_system(topic):
         return redirect(url_for('home_get'))
 
     # Run code from executor.py
-    run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
-    graphs = graphing.create_visualizations(run_id)
+    # run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    run_id = 6
 
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
@@ -97,7 +97,9 @@ def run_system(topic):
 
     data = [[twitter_sent, news_sent],fifths,[twitter_moods,news_moods]]
 
-    graphs = dc.create_visualizations(data)
+    graphs = graphing.create_visualizations(data)
+
+    print("\n\n".join(graphs))
 
     return render_template("results.html", graphs = graphs)
 
