@@ -2,11 +2,48 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <style>
+            h1 {
+                text-align: center;
+            }
+            .card {
+                margin: 0 auto;
+                float: none;
+                margin-bottom: 10px;
+                width: 75%;
+            }
+        </style>
     </head>
     <body>
-        Results
-        <!-- {% for emote in emotes %}
-            <div>{{ emote }}</div>
-        {% endfor %} -->
+        <h1>Results</h1>
+        <br>
+        <div class="card">
+            <img class="card-img-top" src="data:image/png;base64, {{graph1}}" alt="Sentiment Totals">
+            <div class="card-body">
+                <p class="card-text">This graph shows the overall average sentiment showed on the two sources. The top defines the sentiment of people on Twitter, whereas the bottom defines the sentiment of news article authors.</p>
+                <a href="" class="btn btn-primary">More</a>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <img class="card-img-top" src="data:image/png;base64, {{graph2}}" alt="Sentiment Groups">
+            <div class="card-body">
+                <p class="card-text">Categorizes each view that a user presents on Twitter or News articles into one of 5 sentiment groups. This graph visualizes this idea, by showing the number of users in each sentiment category.</p>
+                <a href="" class="btn btn-primary">More</a>
+            </div>
+        </div>
+        <br>
+        <div class="card">
+            <img class="card-img-top" src="data:image/png;base64, {{graph3}}" alt="Mood Words">
+            <div class="card-body">
+                <p class="card-text">Emotional words have been collected. Each word that is dubbed emotional is then categorized into one of seven moods. This graph shows the percentage of emotional words in each category.</p>
+                <a href="" class="btn btn-primary">More</a>
+            </div>
+        </div>
     </body>
 </html>

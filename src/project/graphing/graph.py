@@ -58,7 +58,7 @@ class Graphing:
         plt.xticks(range(0,len(data)), objects)
         plt.xlabel("Sentiment")
         plt.ylabel("Number of Views")
-        plt.title("Views in Different Sentiment Groups")
+        plt.title("Views in Different Sentiment Groups", fontweight='bold')
 
         return self.plot_to_base()
 
@@ -112,7 +112,7 @@ class Graphing:
         ax2.axis('equal')
         ax2.set_title("News", y=1.1)
 
-        plt.suptitle("Mood Words", y=.97)
+        plt.suptitle("Mood Words", fontweight='bold', y=.97)
 
         plt.subplots_adjust(left=0.1, right=0.9, top=.8, bottom=0.3)
 
@@ -120,7 +120,6 @@ class Graphing:
         s1 = sum(out_data1)
         s2 = sum(out_data2)
         labels = ["%s\nTwitter:%.2f%%\nNews:%.2f%%" % (category, t/s1*100, n/s2*100) for category, t, n in zip(out_categories, out_data1, out_data2)]
-        print(labels)
 
         ax1.legend(custom, labels, loc='lower left',ncol=4,bbox_to_anchor=(0, -.6, 0.25, 0.25))
 

@@ -18,7 +18,6 @@ class Database_Connector:
         results.
         """
         results = None
-        print("ON "+self.database_ip+" EXECUTING: "+select_str)
         try:
             conn = psycopg2.connect(dbname=self.database_name, host=self.database_ip, user=self.database_user, password=self.database_password)
             with conn.cursor() as cur:
