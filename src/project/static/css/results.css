@@ -12,6 +12,9 @@ h3 {
 span {
     opacity: .8;
 }
+p {
+    font-size: 12px
+}
 hr {
     width: 66%;
 }
@@ -22,5 +25,27 @@ table, th, td {
     margin: 0 auto;
     float: none;
     margin-bottom: 10px;
-    width: 66%;
+    width: 66%
+}
+@media only screen and (min-width: 1150px) {
+    p {
+        font-size: 13px
+    }
+    hr {
+        width: 50%;
+    }
+    .card {
+        width: 50%
+    }
+}
+@media only screen and (min-width: 1500px) {
+    p {
+        font-size: 16px
+    }
+    hr {
+        width: 40%;
+    }
+    .card {
+        width: 40%
+    }
 }

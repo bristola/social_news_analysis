@@ -86,7 +86,7 @@ def run_system(topic):
 
     # Run code from executor.py
     # run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
-    run_id = 6
+    run_id = 2
 
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 

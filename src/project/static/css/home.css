@@ -10,20 +10,48 @@ h3 {
     text-align: center;
 }
 hr {
-    width:25%;
+    width:60%;
 }
-.live {
-    visibility: visible;
+#live {
+    display: block;
 }
-.loading {
-    visibility: hidden;
+#loading {
+    display: none;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+.destroy {
+    float: right;
+}
+.loading_container {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 .card {
     margin: 0 auto;
     float: none;
     margin-bottom: 10px;
-    width: 25%
+    width: 60%
 }
-.destroy {
-    float: right;
+@media only screen and (min-width: 1150px) {
+    p {
+        font-size: 13px
+    }
+    hr {
+        width: 50%;
+    }
+    .card {
+        width: 50%
+    }
+}
+@media only screen and (min-width: 1500px) {
+    p {
+        font-size: 16px
+    }
+    hr {
+        width: 40%;
+    }
+    .card {
+        width: 40%
+    }
 }
