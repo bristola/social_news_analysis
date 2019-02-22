@@ -22,16 +22,16 @@ class Graphing:
         range_pos = max([abs(d) for d in data])
         categories = ("Twitter", "News")
 
-        fig, ax = plt.subplots(figsize=(20, 2))
+        fig, ax = plt.subplots(figsize=(20, 5))
         plt.subplots_adjust(left=0.1, right=0.9, top=.7, bottom=0.2)
 
         bars = ax.barh(range(0,len(data)), data, align='edge', height=.7, color="khaki")
         colors = ["darkred","forestgreen"]
         for bar, d, category in zip(bars, data, categories):
             bar.set_color(colors[0] if d < 0 else colors[1])
-            ax.text(bar.get_x(), bar.get_y() - .05, category, fontweight='bold', horizontalalignment='center')
+            ax.text(bar.get_x(), bar.get_y() - .05, category, fontsize=22, fontweight='bold', horizontalalignment='center')
         for i, v in enumerate(data):
-            ax.text(v, i-.05, str("%.3f" % v), horizontalalignment='center')
+            ax.text(v, i-.05, str("%.3f" % v), fontsize=22, horizontalalignment='center')
         ax.spines['left'].set_visible(False)
         ax.spines['top'].set_visible(False)
         ax.spines['right'].set_visible(False)
@@ -39,7 +39,7 @@ class Graphing:
         ax.set_yticklabels([])
         ax.set_xlim([range_pos * -1, range_pos])
         ax.invert_yaxis()  # labels read top-to-bottom
-        ax.set_title("Overall Sentiment", fontweight='bold', fontsize=18, y=1.25, horizontalalignment='center')
+        ax.set_title("Overall Sentiment", fontweight='bold', fontsize=30, y=1.25, horizontalalignment='center')
 
         return self.plot_to_base()
 

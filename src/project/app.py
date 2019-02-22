@@ -98,7 +98,7 @@ def run_system(topic):
 
     graphs = graphing.create_visualizations(data)
 
-    return render_template("results.html", graph1 = graphs[0], graph2 = graphs[1], graph3 = graphs[2])
+    return render_template("results.html", topic=topic, graph1 = graphs[0], graph2 = graphs[1], graph3 = graphs[2])
 
 
 if __name__ == "__main__":

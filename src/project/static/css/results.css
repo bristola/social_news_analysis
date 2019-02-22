@@ -1,0 +1,23 @@
+body {
+    background-color: #ededed;
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    text-align: center;
+    font-weight: bold;
+}
+h3 {
+    text-align: center;
+}
+span {
+    opacity: .8;
+}
+hr {
+    width: 66%;
+}
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    width: 66%;
+}
