@@ -85,8 +85,7 @@ def run_system(topic):
         return redirect(url_for('home_get'))
 
     # Run code from executor.py
-    # run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
-    run_id = 2
+    run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
 
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 

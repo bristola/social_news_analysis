@@ -11,7 +11,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
     </head>
     <body>
-        <h1>Results</h1>
+        <button style="float: left;" class="btn btn-primary">&laquo; Back</button>
+        <h1 style="clear: both;">Results</h1>
         <h3><span>Topic:</span> {{topic}}</h3>
         <hr>
         <div class="card text-center">
@@ -40,8 +41,9 @@
         <div class="card text-center">
             <div class="card-body">
                 <p class="card-text">
-                    <table>
+                    <table class="table table-bordered">
                     <tr></tr>
+                        <tr><th>Emoji</th><th>Amount</th></tr>
                     {% for key, value in emotes.items() %}
                         <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
                     {% endfor %}
