@@ -1,14 +1,45 @@
 <!doctype html>
 <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+        <script type=text/javascript src="{{ url_for('static', filename='js/loading.js') }}"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+    </head>
     <body>
-        {% if started %}
-            <form action="" method="post">
-                <p><label for="topic">Topic</label><input type=text name=topic required>
-                <p><input type=submit value=Start>
-            </form>
-            <a href="/destroy_instances"><button type="button" name="button">Destroy Instances</button></a>
-        {% else %}
-            <a href="/setup_instances"><button type="button" name="button">Setup Instances</button></a>
-        {% endif %}
+        <div class="live">
+            <h1>Social Media and News Analysis</h1>
+            <hr>
+            {% if started %}
+                <div class="card">
+                    <div class="card-body">
+                        <form action="" method="post" onsubmit="trigger_loading()">
+                            <div class="form-group">
+                                <label for="topic">Topic</label>
+                                <input type=text name=topic required class="form-control" aria-describedby="topicHelp" placeholder="Enter a topic">
+                                <small id="topicHelp" class="form-text text-muted">Data will be collected based on the input topic.</small>
+                            </div>
+                            <input type=submit class="btn btn-primary" value=Start>
+                            <div class="destroy">
+                                <a href="/destroy_instances"><button type="button" class="btn btn-primary" name="button">Destroy Instances</button></a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            {% else %}
+                <a href="/setup_instances"><button onclick="trigger_loading()" type="button" class="btn btn-primary" name="button">Setup Instances</button></a>
+            {% endif %}
+        </div>
+        <div class="loading">
+            <h3>Loading</h3>
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%"></div>
+            </div>
+        </div>
     </body>
 </html>

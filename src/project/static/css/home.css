@@ -3,24 +3,27 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 h1 {
+    margin-top: 10px;
     text-align: center;
-    font-weight: bold;
 }
 h3 {
     text-align: center;
 }
-span {
-    opacity: .8;
-}
 hr {
-    width: 66%;
+    width:25%;
 }
-table, th, td {
-    border: 1px solid black;
+.live {
+    visibility: visible;
+}
+.loading {
+    visibility: hidden;
 }
 .card {
     margin: 0 auto;
     float: none;
     margin-bottom: 10px;
-    width: 66%;
+    width: 25%
+}
+.destroy {
+    float: right;
 }

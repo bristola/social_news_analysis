@@ -37,5 +37,18 @@
                 <a download="moods.png" href="data:image/png;base64, {{graph3}}" class="btn btn-primary">Download</a>
             </div>
         </div>
+        <div class="card text-center">
+            <div class="card-body">
+                <p class="card-text">
+                    <table>
+                    <tr></tr>
+                    {% for key, value in emotes.items() %}
+                        <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+                    {% endfor %}
+                    </table>
+                </p>
+                <a download="moods.png" href="data:image/png;base64, {{graph3}}" class="btn btn-primary">Download</a>
+            </div>
+        </div>
     </body>
 </html>

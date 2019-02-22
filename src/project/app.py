@@ -85,7 +85,8 @@ def run_system(topic):
         return redirect(url_for('home_get'))
 
     # Run code from executor.py
-    run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    # run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    run_id = 6
 
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
@@ -98,7 +99,7 @@ def run_system(topic):
 
     graphs = graphing.create_visualizations(data)
 
-    return render_template("results.html", topic=topic, graph1 = graphs[0], graph2 = graphs[1], graph3 = graphs[2])
+    return render_template("results.html", topic=topic, graph1 = graphs[0], graph2 = graphs[1], graph3 = graphs[2], emotes = emotes)
 
 
 if __name__ == "__main__":
