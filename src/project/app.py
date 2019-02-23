@@ -30,9 +30,11 @@ def home_get():
     """
     s = conf.check_session()
 
-    dc = Database_Connector(conf.get_session_contents()['Database IP'])
+    jobs = None
 
-    jobs = dc.get_jobs_and_runs()
+    if s:
+        dc = Database_Connector(conf.get_session_contents()['Database IP'])
+        jobs = dc.get_jobs_and_runs()
 
     return render_template('home.html', started = s, jobs = jobs)
 
@@ -90,8 +92,7 @@ def run_system(topic):
         return redirect(url_for('home_get'))
 
     # Execute the system
-    # run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
-    run_id = 2
+    run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
 
     return redirect(url_for('results', topic=topic, run_id=run_id))
 

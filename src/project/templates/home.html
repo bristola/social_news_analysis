@@ -51,8 +51,9 @@
                 {% endfor %}
             {% else %}
                 <div class="card">
-                    <div class="card-body">
-                        <a href="/setup_instances"><button onclick="trigger_loading()" type="button" class="btn btn-primary" name="button">Setup Instances</button></a>
+                    <div class="setup card-body">
+                        <a href="/setup_instances"><button onclick="trigger_loading()" type="button" class="btn btn-primary" name="button">Setup AWS Instances</button></a>
+                        <small class="form-text text-muted"><a href="https://github.com/bristola/social_news_analysis">Need Help?</a></small>
                     </div>
                 </div>
             {% endif %}

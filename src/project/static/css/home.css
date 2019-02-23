@@ -23,6 +23,9 @@ hr {
     margin-left: 5px;
     margin-right: 5px;
 }
+.setup {
+    text-align: center;
+}
 .lower {
     margin-top: 15px;
 }
