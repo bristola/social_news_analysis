@@ -31,6 +31,26 @@
                         </form>
                     </div>
                 </div>
+                <hr>
+                <h2>Previous Runs</h2>
+                {% for topic, runs in jobs.items() %}
+                    <div class="card">
+                        <div class="card-body">
+                            <a><button class="right btn btn-primary">Rerun &orarr;</button></a>
+                            <h3><span>Topic:</span> {{topic}}</h3>
+                            <table class="table table-bordered">
+                                <tr><th>Run ID</th><th>Run Time</th></tr>
+                                {% for run in runs %}
+                                    <tr>
+                                        {% for info in run %}
+                                            <td>{{info}}</td>
+                                        {% endfor %}
+                                    </tr>
+                                {% endfor %}
+                            </table>
+                        </div>
+                    </div>
+                {% endfor %}
             {% else %}
                 <div class="card">
                     <div class="card-body">

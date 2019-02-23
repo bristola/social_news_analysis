@@ -1,5 +1,8 @@
 new_job = "INSERT INTO JOB (TOPIC) VALUES ('%s') RETURNING ID"
 new_run = "INSERT INTO RUN (JOB_ID, RUN_TIME) VALUES (%s, CURRENT_TIMESTAMP) RETURNING ID"
+all_jobs = "SELECT * FROM JOB ORDER BY ID"
+all_runs = "SELECT * FROM RUN ORDER BY JOB_ID"
+get_job = "SELECT ID FROM JOB WHERE TOPIC = '%s'"
 twitter_sentiment = "SELECT SUM(weighted_value)/SUM(weight) FROM (SELECT value * weight as weighted_value, weight FROM SENTIMENT WHERE type = 'Twitter' AND RUN_ID = %s) AS SUB_QUERY"
 news_sentiment = "SELECT AVG(value) FROM SENTIMENT WHERE type = 'News' AND RUN_ID = %s"
 sentiment_groups = ["SELECT SUM(weight) FROM SENTIMENT WHERE value <= -.6 AND RUN_ID = %s",

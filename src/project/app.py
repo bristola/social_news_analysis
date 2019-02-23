@@ -29,7 +29,13 @@ def home_get():
     already been started.
     """
     s = conf.check_session()
-    return render_template('home.html', started = s)
+
+    dc = Database_Connector(conf.get_session_contents()['Database IP'])
+
+    jobs = dc.get_jobs_and_runs()
+    print(jobs)
+
+    return render_template('home.html', started = s, jobs = jobs)
 
 
 @app.route("/", methods=["POST"])
@@ -84,7 +90,7 @@ def run_system(topic):
     if not conf.check_session():
         return redirect(url_for('home_get'))
 
-    # Run code from executor.py
+    # Execute the system
     run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
 
     dc = Database_Connector(conf.get_session_contents()['Database IP'])

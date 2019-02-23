@@ -68,6 +68,28 @@ class Database_Connector:
         return run_id
 
 
+    def get_jobs_and_runs(self):
+        jobs = self.execute_selection(all_jobs)
+        runs = self.execute_selection(all_runs)
+        jobs_and_runs = dict()
+        for job in jobs:
+            out = list()
+            for run in runs:
+                if run[1] == job[0]:
+                    out.append((run[0],str(run[2])))
+            jobs_and_runs[job[1]] = out
+        return jobs_and_runs
+
+
+    def get_job_from_topic(self, topic):
+        results = self.execute_selection(get_job % (str(topic)))
+        if len(results) == 0:
+            return None
+        else:
+            topic = results[0][0]
+            return topic
+
+
     def get_sentiment_totals(self, run_id):
         """
         Executes SQL select to get total sentiment across both types of data.
@@ -115,6 +137,7 @@ class Database_Connector:
             emotes[result[0]] = result[1]
         return emotes
 
-# if __name__ == '__main__':
-#     dc = Database_Connector("18.218.72.158")
-#     dc.get_sentiment_totals()
+if __name__ == '__main__':
+    dc = Database_Connector("3.17.72.84")
+    jobs = dc.get_jobs_and_runs()
+    print(jobs)

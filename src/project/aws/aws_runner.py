@@ -37,7 +37,7 @@ class AWS_Runner:
         return ids, ips
 
 
-    def execute_system(self, session, config, topic, job_id=None):
+    def execute_system(self, session, config, topic):
         """
         Run the actual system, including the data collection and data analytics.
         Inputs the session data, the configuration data, and a specified topic.
@@ -45,6 +45,8 @@ class AWS_Runner:
         will return the run_id that is associated with the results.
         """
         database = Database_Connector(session['Database IP'])
+
+        job_id = database.get_job_from_topic(topic)
 
         # Insert Job into database if it's a new job
         if (job_id is None):
