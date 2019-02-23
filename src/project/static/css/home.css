@@ -23,6 +23,9 @@ hr {
     margin-left: 5px;
     margin-right: 5px;
 }
+.lower {
+    margin-top: 15px;
+}
 .right {
     float: right;
 }

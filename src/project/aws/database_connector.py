@@ -76,7 +76,7 @@ class Database_Connector:
             out = list()
             for run in runs:
                 if run[1] == job[0]:
-                    out.append((run[0],str(run[2])))
+                    out.append((run[0],run[2].strftime("%B %d, %Y at %I:%M %p")))
             jobs_and_runs[job[1]] = out
         return jobs_and_runs
 

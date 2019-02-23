@@ -33,7 +33,6 @@ def home_get():
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
     jobs = dc.get_jobs_and_runs()
-    print(jobs)
 
     return render_template('home.html', started = s, jobs = jobs)
 

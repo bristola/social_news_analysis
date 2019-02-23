@@ -36,15 +36,13 @@
                 {% for topic, runs in jobs.items() %}
                     <div class="card">
                         <div class="card-body">
-                            <a><button class="right btn btn-primary">Rerun &orarr;</button></a>
+                            <a href="/run_system/{{topic}}"><button class="right btn btn-primary">Rerun &orarr;</button></a>
                             <h3><span>Topic:</span> {{topic}}</h3>
-                            <table class="table table-bordered">
-                                <tr><th>Run ID</th><th>Run Time</th></tr>
+                            <table class="lower table">
                                 {% for run in runs %}
                                     <tr>
-                                        {% for info in run %}
-                                            <td>{{info}}</td>
-                                        {% endfor %}
+                                        <td>{{run[1]}}</td>
+                                        <td><a href="/previous_results/{{run[0]}}">View Results</a></td>
                                     </tr>
                                 {% endfor %}
                             </table>
