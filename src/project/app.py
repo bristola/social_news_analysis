@@ -90,8 +90,14 @@ def run_system(topic):
         return redirect(url_for('home_get'))
 
     # Execute the system
-    run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    # run_id = aws.execute_system(conf.get_session_contents(), conf.get_config_contents(), topic)
+    run_id = 2
 
+    return redirect(url_for('results', topic=topic, run_id=run_id))
+
+
+@app.route("/results/<topic>/<run_id>")
+def results(topic, run_id):
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
     twitter_sent, news_sent = dc.get_sentiment_totals(run_id)
