@@ -11,8 +11,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='css/results.css') }}">
     </head>
     <body>
-        <button style="float: left;" class="btn btn-primary">&laquo; Back</button>
-        <h1 style="clear: both;">Results</h1>
+        <a href="/"class="back btn btn-primary">&laquo; Back</a>
+        <h1>Results</h1>
         <h3><span>Topic:</span> {{topic}}</h3>
         <hr>
         <div class="card text-center">
@@ -38,9 +38,11 @@
                 <a download="moods.png" href="data:image/png;base64, {{graph3}}" class="btn btn-primary">Download</a>
             </div>
         </div>
+        <hr>
         <div class="card text-center">
             <div class="card-body">
                 <p class="card-text">
+                    <h3>Emoji Frequency</h3>
                     <table class="table table-bordered">
                     <tr></tr>
                         <tr><th>Emoji</th><th>Amount</th></tr>
