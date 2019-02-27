@@ -69,6 +69,10 @@ class Database_Connector:
 
 
     def get_jobs_and_runs(self):
+        """
+        Gets all the previously created jobs and their run_id that are
+        associated.
+        """
         jobs = self.execute_selection(all_jobs)
         runs = self.execute_selection(all_runs)
         jobs_and_runs = dict()
@@ -82,6 +86,9 @@ class Database_Connector:
 
 
     def get_job_from_topic(self, topic):
+        """
+        Gets the job id for a given topic if one exists.
+        """
         results = self.execute_selection(get_job % (str(topic)))
         if len(results) == 0:
             return None

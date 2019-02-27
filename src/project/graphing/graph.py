@@ -6,7 +6,6 @@ import os
 from matplotlib import font_manager as fm, rcParams
 from matplotlib import rc
 from math import pi
-# from matplotlib.figure_manager import fontManager as fm
 
 class Graphing:
 
@@ -15,6 +14,10 @@ class Graphing:
 
 
     def sentiment_totals_graph(self, data):
+        """
+        Graph which simply displays the overall sentiment of the news articles
+        and the social media posts.
+        """
         plt.clf()
 
         data = [float(d) for d in data]
@@ -45,6 +48,10 @@ class Graphing:
 
 
     def sentiment_groups_graph(self, data):
+        """
+        Displays a bar graph with the number of tweets/articles in each of 5
+        sentiment groups.
+        """
         plt.clf()
 
         plt.figure(figsize=(8, 4))
@@ -64,6 +71,10 @@ class Graphing:
 
 
     def mood_totals_graph(self, data):
+        """
+        Creates two pie charts with the number of words found in each of the
+        emotion groups.
+        """
         plt.clf()
 
         twitter_data = data[0]
@@ -71,13 +82,13 @@ class Graphing:
         news_data = data[1]
 
         colors = {
-        "happiness": "springgreen",
-        "anxiety": "slategrey",
-        "sadness": "royalblue",
-        "affection": "mediumorchid",
-        "aggression": "firebrick",
-        "expressive": "lightpink",
-        "glory": "goldenrod"
+            "happiness": "springgreen",
+            "anxiety": "slategrey",
+            "sadness": "royalblue",
+            "affection": "mediumorchid",
+            "aggression": "firebrick",
+            "expressive": "lightpink",
+            "glory": "goldenrod"
         }
 
 
@@ -127,6 +138,10 @@ class Graphing:
 
 
     def plot_to_base(self):
+        """
+        Takes the current plt graph and converts it to a base64 encoded string
+        that can be displayed in HTML.
+        """
         t = BytesIO()
         plt.savefig(t)
         encoded = base64.b64encode(t.getvalue())
@@ -136,6 +151,10 @@ class Graphing:
 
 
     def create_visualizations(self, data):
+        """
+        Takes all the data from the database and creates the list of base64
+        encode graph images.
+        """
         graphs = list()
         graph_funcs = ["sentiment_totals_graph","sentiment_groups_graph","mood_totals_graph"]
         for gf, d in zip(graph_funcs, data):
