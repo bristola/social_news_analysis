@@ -56,8 +56,8 @@ class AWS_Runner:
         run_id = database.create_new_run(job_id)
 
         # Data collection commands to be executed. Put in data from configuration
-        command1 = commands.data_exec_twitter % (topic, config['Twitter API key'], config['Twitter API secret key'], config['Twitter Access token'], config['Twitter Access token secret'])
-        command2 = commands.data_exec_news % (topic, config['News API key'])
+        command1 = commands.data_exec_twitter % ('"'+topic+'"', config['Twitter API key'], config['Twitter API secret key'], config['Twitter Access token'], config['Twitter Access token secret'])
+        command2 = commands.data_exec_news % ('"'+topic+'"', config['News API key'])
 
         # Parameters for thread pool. Each tuple is their own thread.
         parameters = [

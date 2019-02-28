@@ -46,7 +46,7 @@ class Twitter_Collector(Data_Collector):
         """
         out_tweets = list()
         for tweet in data:
-            out = "%s|%s" % (tweet['retweets'], tweet['text'].replace("\n"," "))
+            out = "%s|%s" % (tweet['retweets'], tweet['text'].replace("\n"," ").replace("\r"," "))
             out_tweets.append(out)
         return out_tweets
 
