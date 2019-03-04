@@ -97,7 +97,7 @@ class Database_Connector:
             return topic
 
 
-    def get_sentiment_totals(self, run_id):
+    def get_sentiment_totals(self, topic, run_id):
         """
         Executes SQL select to get total sentiment across both types of data.
         """
@@ -108,7 +108,7 @@ class Database_Connector:
         return twitter, news
 
 
-    def get_sentiment_groups(self, run_id):
+    def get_sentiment_groups(self, topic, run_id):
         """
         Breaks sentiment results into 5 sections and counts totals in each.
         """
@@ -119,7 +119,7 @@ class Database_Connector:
         return fifths
 
 
-    def get_mood_totals(self, run_id):
+    def get_mood_totals(self, topic, run_id):
         """
         Gets the total counts of each emotion type for each type of data.
         """
@@ -134,7 +134,7 @@ class Database_Connector:
         return twitter_moods, news_moods
 
 
-    def get_emoticon_totals(self, run_id):
+    def get_emoticon_totals(self, topic, run_id):
         """
         Collects the top 10 most used emoticons in our data collection.
         """
@@ -143,8 +143,3 @@ class Database_Connector:
         for result in results:
             emotes[result[0]] = result[1]
         return emotes
-
-if __name__ == '__main__':
-    dc = Database_Connector("3.17.72.84")
-    jobs = dc.get_jobs_and_runs()
-    print(jobs)

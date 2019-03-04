@@ -104,10 +104,10 @@ def results(topic, run_id):
     """
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
-    twitter_sent, news_sent = dc.get_sentiment_totals(run_id)
-    fifths = dc.get_sentiment_groups(run_id)
-    twitter_moods, news_moods = dc.get_mood_totals(run_id)
-    emotes = dc.get_emoticon_totals(run_id)
+    twitter_sent, news_sent = dc.get_sentiment_totals(topic, run_id)
+    fifths = dc.get_sentiment_groups(topic, run_id)
+    twitter_moods, news_moods = dc.get_mood_totals(topic, run_id)
+    emotes = dc.get_emoticon_totals(topic, run_id)
 
     data = [[twitter_sent, news_sent],fifths,[twitter_moods,news_moods]]
 
