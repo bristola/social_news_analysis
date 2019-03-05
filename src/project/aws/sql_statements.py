@@ -23,3 +23,6 @@ news_mood = "SELECT mood, SUM(amount) as totals FROM MOOD WHERE type = 'News' AN
 news_mood_all = "SELECT mood, SUM(amount) as totals FROM MOOD WHERE type = 'News' AND RUN_ID IN (SELECT ID FROM RUN WHERE JOB_ID = (SELECT ID FROM JOB WHERE TOPIC = '%s')) GROUP BY mood ORDER BY totals DESC"
 emoticon = "SELECT emote, SUM(amount) as totals FROM EMOTICON WHERE RUN_ID = %s GROUP BY emote ORDER BY totals DESC LIMIT 10"
 emoticon_all = "SELECT emote, SUM(amount) as totals FROM EMOTICON WHERE RUN_ID IN (SELECT ID FROM RUN WHERE JOB_ID = (SELECT ID FROM JOB WHERE TOPIC = '%s')) GROUP BY emote ORDER BY totals DESC LIMIT 10"
+time_series_twitter = "SELECT SUM(weighted_value)/SUM(weight) FROM (SELECT RUN_ID, value * weight as weighted_value, weight FROM SENTIMENT WHERE type = 'Twitter' AND RUN_ID IN (SELECT ID FROM RUN WHERE JOB_ID = (SELECT ID FROM JOB WHERE TOPIC = '%s'))) AS SUB_QUERY GROUP BY RUN_ID ORDER BY RUN_ID"
+time_series_news = "SELECT AVG(value) FROM SENTIMENT WHERE type = 'News' AND RUN_ID IN (SELECT ID FROM RUN WHERE JOB_ID = (SELECT ID FROM JOB WHERE TOPIC = '%s')) GROUP BY RUN_ID ORDER BY RUN_ID"
+time_series_dates = "SELECT RUN_TIME FROM RUN WHERE JOB_ID = (SELECT ID FROM JOB WHERE TOPIC = '%s') ORDER BY ID"

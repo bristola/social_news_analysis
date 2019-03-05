@@ -137,6 +137,10 @@ class Graphing:
         return self.plot_to_base()
 
 
+    def time_series_graph(self, data):
+        pass
+
+
     def plot_to_base(self):
         """
         Takes the current plt graph and converts it to a base64 encoded string
@@ -156,8 +160,10 @@ class Graphing:
         encode graph images.
         """
         graphs = list()
-        graph_funcs = ["sentiment_totals_graph","sentiment_groups_graph","mood_totals_graph"]
+        graph_funcs = ["sentiment_totals_graph","sentiment_groups_graph","mood_totals_graph","time_series_graph"]
         for gf, d in zip(graph_funcs, data):
+            if data is None:
+                continue
             viz = getattr(self, gf)
             graphs.append(viz(d))
         return graphs
