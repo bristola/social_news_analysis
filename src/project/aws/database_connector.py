@@ -101,9 +101,11 @@ class Database_Connector:
         """
         Executes SQL select to get total sentiment across both types of data.
         """
-        results = self.execute_selection(twitter_sentiment % (str(run_id)))
+        select_str = twitter_sentiment_all % (str(topic)) if run_id is None else twitter_sentiment % (str(run_id))
+        results = self.execute_selection(select_str)
         twitter = results[0][0]
-        results = self.execute_selection(news_sentiment % (str(run_id)))
+        select_str = news_sentiment_all % (str(topic)) if run_id is None else news_sentiment % (str(run_id))
+        results = self.execute_selection(select_str)
         news = results[0][0]
         return twitter, news
 
@@ -113,8 +115,9 @@ class Database_Connector:
         Breaks sentiment results into 5 sections and counts totals in each.
         """
         fifths = list()
-        for group in sentiment_groups:
-            results = self.execute_selection(group % (str(run_id)))
+        for group_all, group in zip(sentiment_groups_all, sentiment_groups):
+            select_str = group_all % (str(topic)) if run_id is None else group % (str(run_id))
+            results = self.execute_selection(select_str)
             fifths.append(results[0][0])
         return fifths
 
@@ -123,12 +126,14 @@ class Database_Connector:
         """
         Gets the total counts of each emotion type for each type of data.
         """
+        select_str = twitter_mood_all % (str(topic)) if run_id is None else twitter_mood % (str(run_id))
         twitter_moods = dict()
-        results = self.execute_selection(twitter_mood % (str(run_id)))
+        results = self.execute_selection(select_str)
         for result in results:
             twitter_moods[result[0]] = result[1]
+        select_str = news_mood_all % (str(topic)) if run_id is None else news_mood % (str(run_id))
         news_moods = dict()
-        results = self.execute_selection(news_mood % (str(run_id)))
+        results = self.execute_selection(select_str)
         for result in results:
             news_moods[result[0]] = result[1]
         return twitter_moods, news_moods
@@ -138,8 +143,9 @@ class Database_Connector:
         """
         Collects the top 10 most used emoticons in our data collection.
         """
+        select_str = emoticon_all % (str(topic)) if run_id is None else emoticon % (str(run_id))
         emotes = dict()
-        results = self.execute_selection(emoticon % (str(run_id)))
+        results = self.execute_selection(select_str)
         for result in results:
             emotes[result[0]] = result[1]
         return emotes

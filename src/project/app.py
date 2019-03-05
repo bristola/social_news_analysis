@@ -102,6 +102,8 @@ def results(topic, run_id):
     """
     Queries the database based on the run_id, and render the results.
     """
+    run_id = None if run_id == "ALL" else run_id
+
     dc = Database_Connector(conf.get_session_contents()['Database IP'])
 
     twitter_sent, news_sent = dc.get_sentiment_totals(topic, run_id)
