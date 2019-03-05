@@ -45,6 +45,10 @@
                                         <td><a onclick="trigger_loading()" href="/results/{{topic}}/{{run[0]}}">View Results</a></td>
                                     </tr>
                                 {% endfor %}
+                                <tr>
+                                    <td><b>Total: {{runs|length}}</b></td>
+                                    <td><b><a onclick="trigger_loading()" href="/results/{{topic}}/ALL">Aggregate Results</a></b></td>
+                                </tr>
                             </table>
                         </div>
                     </div>
