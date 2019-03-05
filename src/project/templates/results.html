@@ -16,26 +16,26 @@
         <h3><span>Topic:</span> {{topic}}</h3>
         <hr>
         <div class="card text-center">
-            <img class="card-img-top" src="data:image/png;base64, {{graph1}}" alt="Sentiment Totals">
+            <img class="card-img-top" src="data:image/png;base64, {{graphs[0]}}" alt="Sentiment Totals">
             <div class="card-body">
                 <p class="card-text">This graph shows the overall average sentiment showed on the two sources. The top defines the sentiment of people on Twitter, whereas the bottom defines the sentiment of news article authors.</p>
-                <a download="sentiment_totals.png" href="data:image/png;base64, {{graph1}}" class="btn btn-primary">Download</a>
+                <a download="sentiment_totals.png" href="data:image/png;base64, {{graphs[0]}}" class="btn btn-primary">Download</a>
             </div>
         </div>
         <hr>
         <div class="card text-center">
-            <img class="card-img-top" src="data:image/png;base64, {{graph2}}" alt="Sentiment Groups">
+            <img class="card-img-top" src="data:image/png;base64, {{graphs[1]}}" alt="Sentiment Groups">
             <div class="card-body">
                 <p class="card-text">Categorizes each view that a user presents on Twitter or News articles into one of 5 sentiment groups. This graph visualizes this idea, by showing the number of users in each sentiment category.</p>
-                <a download="sentiment_groups.png" href="data:image/png;base64, {{graph2}}" class="btn btn-primary">Download</a>
+                <a download="sentiment_groups.png" href="data:image/png;base64, {{graphs[1]}}" class="btn btn-primary">Download</a>
             </div>
         </div>
         <hr>
         <div class="card text-center">
-            <img class="card-img-top" src="data:image/png;base64, {{graph3}}" alt="Mood Words">
+            <img class="card-img-top" src="data:image/png;base64, {{graphs[2]}}" alt="Mood Words">
             <div class="card-body">
                 <p class="card-text">Emotional words have been collected. Each word that is dubbed emotional is then categorized into one of seven moods. This graph shows the percentage of emotional words in each category.</p>
-                <a download="moods.png" href="data:image/png;base64, {{graph3}}" class="btn btn-primary">Download</a>
+                <a download="moods.png" href="data:image/png;base64, {{graphs[2]}}" class="btn btn-primary">Download</a>
             </div>
         </div>
         <hr>

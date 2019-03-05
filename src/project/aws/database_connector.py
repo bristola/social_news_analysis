@@ -149,3 +149,7 @@ class Database_Connector:
         for result in results:
             emotes[result[0]] = result[1]
         return emotes
+
+
+    def get_time_series(self, topic):
+        pass

@@ -110,12 +110,15 @@ def results(topic, run_id):
     fifths = dc.get_sentiment_groups(topic, run_id)
     twitter_moods, news_moods = dc.get_mood_totals(topic, run_id)
     emotes = dc.get_emoticon_totals(topic, run_id)
+    # time_series = None
+    # if run_id is None:
+    #     time_series = dc.get_time_series(topic)
 
     data = [[twitter_sent, news_sent],fifths,[twitter_moods,news_moods]]
 
     graphs = graphing.create_visualizations(data)
 
-    return render_template("results.html", topic=topic, graph1 = graphs[0], graph2 = graphs[1], graph3 = graphs[2], emotes = emotes)
+    return render_template("results.html", topic=topic, graphs = graphs, emotes = emotes)
 
 
 if __name__ == "__main__":
