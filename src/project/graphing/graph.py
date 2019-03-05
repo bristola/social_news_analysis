@@ -138,7 +138,15 @@ class Graphing:
 
 
     def time_series_graph(self, data):
-        pass
+        plt.clf()
+
+        twitter_time_series = data[0][0]
+        news_time_series = data[0][1]
+        dates = data[1]
+
+        plt.plot(dates, twitter_time_series, 'orangered', dates, news_time_series, 'steelblue')
+
+        return self.plot_to_base()
 
 
     def plot_to_base(self):
@@ -162,7 +170,7 @@ class Graphing:
         graphs = list()
         graph_funcs = ["sentiment_totals_graph","sentiment_groups_graph","mood_totals_graph","time_series_graph"]
         for gf, d in zip(graph_funcs, data):
-            if data is None:
+            if d is None:
                 continue
             viz = getattr(self, gf)
             graphs.append(viz(d))

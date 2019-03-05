@@ -1,5 +1,5 @@
 import psycopg2
-from sql_statements import *
+from aws.sql_statements import *
 
 # pip install psycopg2
 
@@ -157,5 +157,5 @@ class Database_Connector:
         results = self.execute_selection(time_series_news % topic)
         news_data = [result[0] for result in results]
         results = self.execute_selection(time_series_dates % topic)
-        dates = [result[0].strftime("%B %d, %Y at %I:%M %p") for result in results]
+        dates = [result[0] for result in results]
         return (twitter_data, news_data), dates

@@ -39,6 +39,16 @@
             </div>
         </div>
         <hr>
+        {% if graphs|length >= 4 %}
+            <div class="card text-center">
+                <img class="card-img-top" src="data:image/png;base64, {{graphs[3]}}" alt="Timeseries">
+                <div class="card-body">
+                    <p class="card-text">The trend of the sentiment of this topic over all the runs.</p>
+                    <a download="moods.png" href="data:image/png;base64, {{graphs[3]}}" class="btn btn-primary">Download</a>
+                </div>
+            </div>
+            <hr>
+        {% endif %}
         <div class="card text-center">
             <div class="card-body">
                 <p class="card-text">

@@ -112,9 +112,10 @@ def results(topic, run_id):
     emotes = dc.get_emoticon_totals(topic, run_id)
     time_series = None
     if run_id is None:
-        time_series = dc.get_time_series(topic)
+        data, dates = dc.get_time_series(topic)
+        time_series = [data,dates]
 
-    data = [[twitter_sent, news_sent],fifths,[twitter_moods,news_moods]]
+    data = [[twitter_sent, news_sent],fifths,[twitter_moods,news_moods],time_series]
 
     graphs = graphing.create_visualizations(data)
 
