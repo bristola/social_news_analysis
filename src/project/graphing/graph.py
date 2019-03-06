@@ -5,6 +5,7 @@ import base64
 import os
 from matplotlib import font_manager as fm, rcParams
 from matplotlib import rc
+import matplotlib.dates as mdates
 from math import pi
 
 class Graphing:
@@ -140,11 +141,29 @@ class Graphing:
     def time_series_graph(self, data):
         plt.clf()
 
-        twitter_time_series = data[0][0]
-        news_time_series = data[0][1]
+        twitter_time_series = [float(d) for d in data[0][0]]
+        news_time_series = [float(d) for d in data[0][1]]
         dates = data[1]
 
-        plt.plot(dates, twitter_time_series, 'orangered', dates, news_time_series, 'steelblue')
+        fig, ax = plt.subplots(figsize=(8, 4))
+
+        ax.plot(dates, twitter_time_series, 'orangered', dates, news_time_series, 'steelblue')
+
+        y_range = max([abs(d) for d in twitter_time_series + news_time_series])*3/2
+        ax.set_ylim(-1*y_range,y_range)
+
+        ax.axhline(0, color='gainsboro', linestyle="--")
+
+        ax.legend(["Twitter","News"])
+
+        plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%m/%d/%Y\n%I:%M %p'))
+        plt.gca().xaxis.set_major_locator(mdates.DayLocator())
+        plt.gcf().autofmt_xdate()
+        factor = (max(dates) - min(dates)) / 4
+        plt.xticks([min(dates)+(factor*i) for i in range(0,5)])
+        plt.xlabel("Timestamp")
+        plt.ylabel("Sentiment")
+        plt.title("Change in Sentiment Over Time", fontweight='bold')
 
         return self.plot_to_base()
 
