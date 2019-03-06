@@ -32,7 +32,9 @@
                     </div>
                 </div>
                 <hr>
-                <h2>Previous Runs</h2>
+                {% if jobs|length > 0 %}
+                    <h2>Previous Runs</h2>
+                {% endif %}
                 {% for topic, runs in jobs.items() %}
                     <div class="card">
                         <div class="card-body">
