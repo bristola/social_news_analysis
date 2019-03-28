@@ -15,7 +15,7 @@ Below shows various example visualizations that are produced by this software sy
 
 Also, you can view how the system works all together by viewing the following demo video.
 
-[Demo](https://youtu.be/oO-sEbG8oZI)
+[![](http://img.youtube.com/vi/oO-sEbG8oZI/0.jpg)](http://www.youtube.com/watch?v=oO-sEbG8oZI "Demo")
 
 ### Technology
 
