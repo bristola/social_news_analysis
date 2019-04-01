@@ -69,6 +69,8 @@ In order to be able to correctly install this software system and get it up and 
 
    For more information on how this works, please checkout the following web page: <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html>
 
+1. In the [AWS console](https://us-east-2.console.aws.amazon.com/ec2/v2/home?region=us-east-2#SecurityGroups:sort=groupId) create a new security group. Add two inbound rules: One which is of the 'PostgreSQL' type and the source is from anywhere. Another which is of the 'SSH' type and the source is also from anywhere. After this security group is created, make sure you save the Group ID of this security group.
+
 1. You must have Python 3 and Pip installed on your machine.
 
 ## Installation
@@ -85,7 +87,19 @@ The final step of getting the system up and running is to actual install everyth
    ```cd src```
    ```cd project```
    
-1. Edit the *config.txt* file by replacing the API credentials you have saved from your accounts, and entering them in the correct spots.
+1. Create a *config.txt* file in the *project* directory in the following format:
+   ```
+   Twitter API key = <Your API key>
+   Twitter API secret key = <Your API secret>
+   Twitter Access token = <Your token>
+   Twitter Access token secret = <Your token secret>
+   News API key = <Your API key>
+   AWS Key Name = <Your AWS PEM name>
+   AWS Machine Type = t2.micro
+   AWS Security Group ID = <Your AWS security ID>
+   AWS Image ID = <Your Image ID>
+   Path to pem = <Your absolute path to PEM file>
+   ```
 
 1. Execute the code using ```python3 app.py``` on Linux or ```py app.py``` on Windows. Python command can change based on how it is installed on the machine.
 
