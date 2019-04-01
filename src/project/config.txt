@@ -1,0 +1,10 @@
+Twitter API key = <Your API key>
+Twitter API secret key = <Your API secret>
+Twitter Access token = <Your token>
+Twitter Access token secret = <Your token secret>
+News API key = <Your API key>
+AWS Key Name = <Your AWS PEM name>
+AWS Machine Type = t2.micro
+AWS Security Group ID = <Your AWS security ID>
+AWS Image ID = <Your Image ID>
+Path to pem = <Your absolute path to PEM file>
