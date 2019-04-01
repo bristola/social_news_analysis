@@ -69,4 +69,24 @@ In order to be able to correctly install this software system and get it up and 
 
    For more information on how this works, please checkout the following web page: <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html>
 
+1. You must have Python 3 and Pip installed on your machine.
+
 ## Installation
+
+The final step of getting the system up and running is to actual install everything. You will need to not only install the code but the dependancies as well. Below is a list of steps to set up and run the code.
+
+1. Open a terminal window and traverse to the directory you would like to install the code.
+
+1. Run ```git clone git@github.com:bristola/social_news_analysis.git```
+
+1. Run ```pip3 install -r requirements.txt``` on Linux or ```pip install -r requirements.txt``` on Windows
+
+1. Traverse to the correct directory by typing:
+   ```cd src```
+   ```cd project```
+   
+1. Edit the *config.txt* file by replacing the API credentials you have saved from your accounts, and entering them in the correct spots.
+
+1. Execute the code using ```python3 app.py``` on Linux or ```py app.py``` on Windows. Python command can change based on how it is installed on the machine.
+
+1. Finally, after executing the code, you can traverse to <http://127.0.0.1:5000> to start using the system.
