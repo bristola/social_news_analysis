@@ -27,6 +27,28 @@ line graph, and emoticon table.
 
 ### Technology
 
+There were a suite of technologies used in the development of the project. Specifically, a lot of different Python packages were used to complete this project. Also, Amazon Web Services were used in great detail as well. Below is a listing of the technologies that were used in this project:
+
+- [Python 3.6](<https://www.python.org/>)
+
+- [Flask](<http://flask.pocoo.org/>)
+
+- [python-twitter](<https://python-twitter.readthedocs.io/en/latest/>)
+
+- [News API](<https://newsapi.org/docs/client-libraries/python>)
+
+- [Newspaper3k](<https://github.com/codelucas/newspaper>)
+
+- [Natural Language Toolkit](<https://www.nltk.org/>)
+
+- [Matplotlib](<https://matplotlib.org/>)
+
+- [AWS SDK for Python](<https://aws.amazon.com/sdk-for-python/>)
+
+- [AWS EC2](<https://aws.amazon.com/ec2/>)
+
+- [PostgreSQL](<https://www.postgresql.org/>)
+
 ## Prerequisites
 
 ## Installation
