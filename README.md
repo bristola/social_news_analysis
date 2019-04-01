@@ -9,11 +9,7 @@ This software system allows users to collect large amounts of media data from Tw
 
 ### Examples
 
-You can view how the system works all together by viewing the following [demo
-video](https://youtu.be/oO-sEbG8oZI). Also, Below shows various example
-visualizations that are produced by this software system. Included, the overall
-sentiment visualization, a sentiment bar graph, mood pie chart, sentiment change
-line graph, and emoticon table.
+You can view how the system works all together by viewing the following [demo video](https://youtu.be/oO-sEbG8oZI). Also, Below shows various example visualizations that are produced by this software system. Included, the overall sentiment visualization, a sentiment bar graph, mood pie chart, sentiment change line graph, and emoticon table.
 
 <img src="./img/sentiment_totals.png" width="60%"></img>
 
@@ -42,6 +38,10 @@ There were a suite of technologies used in the development of the project. Speci
 - [Natural Language Toolkit](<https://www.nltk.org/>)
 
 - [Matplotlib](<https://matplotlib.org/>)
+
+- [Paramiko](http://www.paramiko.org/)
+
+- [scp](https://pypi.org/project/scp/)
 
 - [AWS SDK for Python](<https://aws.amazon.com/sdk-for-python/>)
 
