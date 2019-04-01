@@ -9,11 +9,21 @@ This software system allows users to collect large amounts of media data from Tw
 
 ### Examples
 
-Below shows various example visualizations that are produced by this software system. Include, overall data visualization, a bar graph, pie chart, line graph, and emoticon table.
+You can view how the system works all together by viewing the following [demo
+video](https://youtu.be/oO-sEbG8oZI). Also, Below shows various example
+visualizations that are produced by this software system. Included, the overall
+sentiment visualization, a sentiment bar graph, mood pie chart, sentiment change
+line graph, and emoticon table.
 
+<img src="./img/sentiment_totals.png" width="60%"></img>
 
+<img src="./img/sentiment_groups.png" width="60%"></img>
 
-Also, you can view how the system works all together by viewing the following [demo video](https://youtu.be/oO-sEbG8oZI).
+<img src="./img/moods.png" width="60%"></img>
+
+<img src="./img/sentiment_change.png" width="60%"></img>
+
+<img src="./img/emoticons.PNG" width="60%"></img>
 
 ### Technology
 
