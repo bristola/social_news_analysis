@@ -51,4 +51,22 @@ There were a suite of technologies used in the development of the project. Speci
 
 ## Prerequisites
 
+In order to be able to correctly install this software system and get it up and running, there are few things you need to do. This ranges from creating accounts on different platforms, as well as set up internal files. Below is a list of tasks that must be completed before installing the system.
+
+1. Create a developer account on Twitter. Traverse to this [link](https://developer.twitter.com/) and create an account. You can create. Then, you will be able to go to the [apps](https://developer.twitter.com/en/apps) page, and create a new app. Here you can create new application by following the prompts. Finally, once the app is created, you will need to save the all keys and tokens found in the 'Keys and tokens' tab of the details.
+
+1. Create an account on the [newsapi](https://newsapi.org/) website. Once you create a free account, you will need to save the API key found in the [account](https://newsapi.org/account) page.
+
+1. Create an account on [AWS](https://aws.amazon.com/). This will make you set up your account with a credit card and other information.
+
+1. Set up your credentials file on you local machine. In order to use any AWS APIs, you will need to set up a credentials file on your machine. First, create a new set of keys by going to the [credentials](https://console.aws.amazon.com/iam/home?region=us-east-2#/security_credentials) page of your AWS console, and traversing to the 'Access keys' tab. Next, you will need to place this content in a credentials file located at *~/.aws/credentials* on Linux, macOS, or Unix and *C:\Users\USERNAME\.aws\credentials* on Windows. The contents of the *credentials* file should appear in the following way:
+
+   ```
+   [default]
+   aws_access_key_id = your_access_key_id
+   aws_secret_access_key = your_secret_access_key
+   ```
+
+   For more information on how this works, please checkout the following web page: <https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html>
+
 ## Installation
