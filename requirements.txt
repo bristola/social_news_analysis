@@ -1,0 +1,6 @@
+flask==0.12.2
+matplotlib==2.0.2
+boto3==1.9.82
+paramiko==2.4.2
+scp==0.13.0
+psycopg2==2.7.4
