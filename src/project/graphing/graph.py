@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 from io import BytesIO
 import base64
@@ -44,7 +46,11 @@ class Graphing:
         ax.invert_yaxis()  # labels read top-to-bottom
         ax.set_title("Overall Sentiment", fontweight='bold', fontsize=30, y=1.25, horizontalalignment='center')
 
-        return self.plot_to_base()
+        encoded_graph = self.plot_to_base()
+
+        plt.close()
+
+        return encoded_graph
 
 
     def sentiment_groups_graph(self, data):
@@ -67,7 +73,11 @@ class Graphing:
         plt.ylabel("Number of Views")
         plt.title("Views in Different Sentiment Groups", fontweight='bold')
 
-        return self.plot_to_base()
+        encoded_graph = self.plot_to_base()
+
+        plt.close()
+
+        return encoded_graph
 
 
     def mood_totals_graph(self, data):
@@ -134,7 +144,11 @@ class Graphing:
 
         ax1.legend(custom, labels, loc='lower left',ncol=4,bbox_to_anchor=(0, -.6, 0.25, 0.25))
 
-        return self.plot_to_base()
+        encoded_graph = self.plot_to_base()
+
+        plt.close()
+
+        return encoded_graph
 
 
     def time_series_graph(self, data):
@@ -164,7 +178,11 @@ class Graphing:
         plt.ylabel("Sentiment")
         plt.title("Change in Sentiment Over Time", fontweight='bold')
 
-        return self.plot_to_base()
+        encoded_graph = self.plot_to_base()
+
+        plt.close()
+
+        return encoded_graph
 
 
     def plot_to_base(self):
