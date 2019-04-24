@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/bristola/social_news_analysis.svg?branch=master)](https://travis-ci.com/bristola/social_news_analysis)
+[![Build Status](https://travis-ci.com/bristola/social_news_analysis.svg?branch=master)](https://travis-ci.com/bristola/social_news_analysis) [![made-with-python](https://img.shields.io/badge/Made%20with-Python-orange.svg)](https://www.python.org/)
 
 # Social and News Media Analysis
 ### By: Austin Bristol
