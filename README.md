@@ -112,3 +112,11 @@ The final step of getting the system up and running is to actual install everyth
 1. Execute the code using ```python3 app.py``` on Linux or ```py app.py``` on Windows. Python command can change based on how it is installed on the machine.
 
 1. Finally, after executing the code, you can traverse to <http://127.0.0.1:5000> to start using the system.
+
+## Testing
+
+You can run a Python test suite by traversing to the root of the project and running the following command:
+
+```
+pytest
+```
