@@ -6,7 +6,7 @@ a = Analyzer()
 @pytest.mark.parametrize(
     "word,valid",
     [
-        ("test", True),
+        ("test", False),
         ("word", True),
         ("computer", True),
         ("twitter", True),
