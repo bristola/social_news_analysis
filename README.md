@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/bristola/social_news_analysis.svg?branch=master)](https://travis-ci.com/bristola/social_news_analysis)
+
 # Social and News Media Analysis
 ### By: Austin Bristol
 
