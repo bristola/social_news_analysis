@@ -35,6 +35,7 @@ class Analyzer:
         Filters out any tokens that are links or stop words.
         """
         # Expression for finding links. Return false if one is found
+        # Expression found at https://stackoverflow.com/questions/27515969/regular-expression-validation-php/27516155
         expression = re.compile(r'(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?')
         if expression.search(word):
             return False
@@ -88,6 +89,7 @@ class Analyzer:
         """
         emoticons = list()
         # Finds any substring which represents an emote
+        # Expression found at https://stackoverflow.com/questions/28783420/cannot-compile-8-digit-unicode-regex-ranges-in-python-2-7-re
         emoticons.extend(re.findall(u'[\U00010000-\U0010ffff]', line, flags=re.UNICODE))
         return emoticons
 
